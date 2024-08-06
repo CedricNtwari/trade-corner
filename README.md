@@ -57,3 +57,5 @@ Contributions are what make the open-source community such an amazing place to l
 Cedric Ntwari - @CedricNtwari
 
 Project Link: Trade Corner [here](https://trade-corner-018d2b5f7079.herokuapp.com/).
+
+Project Management, board of user stories on GitHub [here](https://github.com/users/CedricNtwari/projects/6/views/1).
