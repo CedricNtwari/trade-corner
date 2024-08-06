@@ -1,12 +1,14 @@
 # TradeCorner: Your Digital Marketplace
 
+**Slogan: A World of Products at Your Fingertips**
+
 Welcome to TradeCorner, a dynamic and user-friendly marketplace platform where individuals can buy and sell products effortlessly. Designed to cater to a wide range of sellers and buyers, TradeCorner provides a seamless shopping experience reminiscent of a bustling marketplace, all from the comfort of your home.
 
 ## Getting Started
 
 To get a local copy up and running, follow these simple steps:
 
-### Prerequisites
+### Prerequisite
 
 - Node.js
 - npm
