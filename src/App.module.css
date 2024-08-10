@@ -16,6 +16,7 @@ a {
 
 a:hover {
   text-decoration: none;
+  color: #c9378b;
 }
 
 a:hover i {
@@ -25,7 +26,6 @@ a:hover i {
 
 i {
   color: #cfced3;
-  font-size: 1.6rem;
   padding: 7px;
   vertical-align: middle;
 }
@@ -33,7 +33,7 @@ i {
 i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
-  color: #2142b2;
+  color: #c9378b;
 }
 
 /* Specific Roboto font styles */
