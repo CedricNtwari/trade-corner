@@ -1,9 +1,165 @@
+/* NavBar styles */
 .NavBar {
-  background-color: #ffffff;
-  border: 1px solid #dadadf;
+  z-index: 1010;
+  width: 100%;
 }
 
-.navLinkText:hover,
-.navLinkText:focus {
-  color: #f6caec !important;
+.navContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.desktopMenu {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  z-index: 1060; /* Above the backdrop */
+}
+
+.desktopMenu .nav-link,
+.mobileNav .nav-link {
+  color: #555555 !important;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navLinkCart {
+  position: relative;
+}
+
+.container {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: 100%;
+}
+
+.navLinkText {
+  margin-left: 5px;
+}
+
+.navLinkText:hover {
+  color: #c9378b;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  border-radius: 20px;
+  padding: 8px 12px;
+  position: relative;
+  border: 1px solid #dadadf;
+  text-align: center;
+  height: 40px;
+  line-height: 1;
+}
+
+.menuWrapper {
+  position: relative;
+  display: inline-block;
+  padding-left: 70px;
+}
+
+/* Dropdown menu styles */
+.dropdownMenu {
+  position: absolute;
+  top: 82px;
+  right: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #dadadf;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1070; /* Above the backdrop */
+  border-radius: 4px;
+  padding: 10px;
+  width: 300px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.dropdownMenuOpen {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; /* Allow interaction when visible */
+}
+
+/* Backdrop styles */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050; /* Below the dropdown menu */
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.backdropOpen {
+  opacity: 1;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchLink {
+  cursor: pointer;
+}
+
+.searchInput {
+  width: 0;
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  z-index: 1052;
+  opacity: 0;
+  transition:
+    width 0.3s ease,
+    opacity 0.3s ease,
+    border-bottom-color 0.3s ease;
+  margin-left: 5px;
+  outline: none;
+}
+
+.searchInputOpen {
+  width: 150px;
+  opacity: 1;
+  width: -webkit-fill-available;
+}
+
+.searchInput:focus-visible {
+  border-bottom-color: #c9378b;
+  box-shadow: none;
+}
+
+.cartWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.cartCount {
+  position: absolute;
+  top: -3px;
+  right: -5px;
+  background-color: #c9378b;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8em;
+  z-index: 1060;
 }
