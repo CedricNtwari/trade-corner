@@ -1,0 +1,39 @@
+.footer {
+  background-color: #f8f9fa;
+  padding: 20px 0 0 0;
+  border-top: 1px solid #e7e7e7;
+}
+
+.container {
+  max-width: none;
+}
+
+.slogan {
+  font-size: 2rem;
+  margin: 0;
+  color: #333;
+  line-height: 1.7;
+  letter-spacing: 0.03043478261em;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.socialIcons a {
+  color: #333;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.socialIcons a:hover {
+  color: #c9378b; /* Accent color for hover */
+}
+
+.copyright {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 10px;
+}
