@@ -40,6 +40,8 @@
 
 .navLinkText {
   margin-left: 5px;
+  font-size: large;
+  letter-spacing: 0.0625em;
 }
 
 .navLinkText:hover {
