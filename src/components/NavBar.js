@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import logo from '../assets/tc-high-resolution-logo-transparent.png'
 import styles from '../styles/NavBar.module.css'
+import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -39,47 +40,53 @@ const NavBar = () => {
     setSearchOpen((prev) => !prev)
   }
 
+  const closeMenu = () => {
+    const toggle = document.querySelector('.navbar-toggler')
+    if (toggle) {
+      toggle.click()
+    }
+  }
+
+  const isSearchActive = searchOpen
+  const isMenuActive = menuOpen
+
   return (
     <>
       <Navbar className={styles.NavBar} expand="md" fixed="top">
         <Container className={styles.container}>
-          <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
-          </Navbar.Brand>
+          <NavLink to="/">
+            <Navbar.Brand>
+              <img src={logo} alt="logo" height="45" />
+            </Navbar.Brand>
+          </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className={`ml-auto text-left ${styles.navContent}`}>
               {/* Mobile Links Directly in Navbar */}
-              <div className="d-md-none">
-                <Nav.Link href="#home">
+              <div className={`d-md-none ${styles.OpenNavMobile}`} ref={dropdownRef}>
+                <NavLink exact to="/" activeClassName={styles.Active} onClick={closeMenu}>
                   <i className="fas fa-home"></i>
                   <span className={styles.navLinkText}>Home</span>
-                </Nav.Link>
-                <Nav.Link href="#about">
-                  <i className="fas fa-info-circle"></i>
-                  <span className={styles.navLinkText}>About</span>
-                </Nav.Link>
-                <Nav.Link href="#contact">
-                  <i className="fas fa-envelope"></i>
-                  <span className={styles.navLinkText}>Contact</span>
-                </Nav.Link>
-                <Nav.Link href="#signin">
+                </NavLink>
+                <NavLink to="/signin" activeClassName={styles.Active} onClick={closeMenu}>
                   <i className="fas fa-sign-in-alt"></i>
                   <span className={styles.navLinkText}>Sign in</span>
-                </Nav.Link>
-                <Nav.Link href="#signup">
+                </NavLink>
+                <NavLink to="/signup" activeClassName={styles.Active} onClick={closeMenu}>
                   <i className="fas fa-user-plus"></i>
                   <span className={styles.navLinkText}>Sign up</span>
-                </Nav.Link>
+                </NavLink>
                 <div className={styles.searchWrapper} ref={searchRef}>
-                  <Nav.Link
+                  <button
                     onClick={handleSearchToggle}
-                    className={styles.searchLink}
+                    className={`${styles.searchLink} ${
+                      isSearchActive ? styles.searchLinkActive : ''
+                    }`}
                     role="button"
                     aria-label="search"
                   >
                     <i className="fas fa-search"></i>
-                  </Nav.Link>
+                  </button>
                   {searchOpen && (
                     <input
                       type="text"
@@ -93,18 +100,27 @@ const NavBar = () => {
                 </div>
                 {/* Cart Icon and Count */}
                 <div className={styles.cartWrapper}>
-                  <Nav.Link className={styles.navLinkCart} href="#cart">
+                  <NavLink
+                    className={styles.navLinkCart}
+                    activeClassName={styles.Active}
+                    to="/cart"
+                  >
                     <i className="fas fa-shopping-cart"></i>
                     <span className={styles.cartCount}>{cartCount}</span>
-                  </Nav.Link>
+                  </NavLink>
                 </div>
               </div>
               {/* Desktop Links as Dropdown Menu */}
               <div className={`d-none d-md-flex ${styles.desktopMenu}`}>
                 <div className={styles.searchWrapper} ref={searchRef}>
-                  <Nav.Link onClick={handleSearchToggle} className={styles.searchLink}>
+                  <button
+                    onClick={handleSearchToggle}
+                    className={`${styles.searchLink} ${
+                      isSearchActive ? styles.searchLinkActive : ''
+                    }`}
+                  >
                     <i className="fas fa-search"></i>
-                  </Nav.Link>
+                  </button>
                   {searchOpen && (
                     <input
                       type="text"
@@ -117,21 +133,25 @@ const NavBar = () => {
                   )}
                 </div>
                 <div className={styles.cartWrapper}>
-                  <Nav.Link
+                  <NavLink
                     className={styles.navLinkCart}
-                    href="#cart"
+                    to="/cart"
                     role="link"
                     aria-label="shopping-cart"
+                    activeClassName={styles.Active}
                   >
                     <i className="fas fa-shopping-cart"></i>
                     <span className={styles.cartCount}>{cartCount}</span>
-                  </Nav.Link>
+                  </NavLink>
                 </div>
                 <div className={styles.menuWrapper} ref={menuRef}>
-                  <Nav.Link onClick={handleMenuToggle} className={styles.menuLink}>
+                  <button
+                    onClick={handleMenuToggle}
+                    className={`${styles.menuLink} ${isMenuActive ? styles.menuLinkActive : ''}`}
+                  >
                     <span className={styles.navLinkText}>Menu </span>
                     <i className="fas fa-bars"></i>
-                  </Nav.Link>
+                  </button>
                 </div>
               </div>
             </Nav>
@@ -149,26 +169,18 @@ const NavBar = () => {
         data-testid="dropdown-menu"
       >
         <Nav className="flex-column">
-          <Nav.Link href="#home">
+          <NavLink exact to="/" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
             <i className="fas fa-home"></i>
             <span className={styles.navLinkText}>Home</span>
-          </Nav.Link>
-          <Nav.Link href="#about">
-            <i className="fas fa-info-circle"></i>
-            <span className={styles.navLinkText}>About</span>
-          </Nav.Link>
-          <Nav.Link href="#contact">
-            <i className="fas fa-envelope"></i>
-            <span className={styles.navLinkText}>Contact</span>
-          </Nav.Link>
-          <Nav.Link href="#signin">
+          </NavLink>
+          <NavLink to="/signin" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
             <i className="fas fa-sign-in-alt"></i>
             <span className={styles.navLinkText}>Sign in</span>
-          </Nav.Link>
-          <Nav.Link href="#signup">
+          </NavLink>
+          <NavLink to="/signup" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
             <i className="fas fa-user-plus"></i>
             <span className={styles.navLinkText}>Sign up</span>
-          </Nav.Link>
+          </NavLink>
         </Nav>
       </div>
     </>
