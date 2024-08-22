@@ -1,5 +1,4 @@
 .Button {
-  font-size: 0.8rem;
   align-self: center;
   border-radius: 100px;
   border-color: transparent;
@@ -7,6 +6,8 @@
   margin-left: 2px;
   margin-right: 2px;
   min-width: 75px;
+  line-height: 1.5em;
+  letter-spacing: 0.0625em;
 }
 
 .Button:hover {
