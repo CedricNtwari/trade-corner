@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import logo from '../assets/tc-high-resolution-logo-transparent.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom'
-import { CurrentUserContext } from '../App'
+import { useCurrentUser } from '../contexts/CurrentUserContext'
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -51,7 +51,7 @@ const NavBar = () => {
   const isSearchActive = searchOpen
   const isMenuActive = menuOpen
 
-  const currentUser = useContext(CurrentUserContext)
+  const currentUser = useCurrentUser()
   const loggedInIcons = <>{currentUser?.username}</>
   const loggedOutIcons = (
     <>
