@@ -2,7 +2,6 @@
   height: calc(100vh - 81px);
   position: relative;
   top: 30px;
-  color: #777;
   line-height: 1.5em;
   letter-spacing: 0.0625em;
 }
@@ -78,12 +77,4 @@
 
 .Container {
   padding: 30px 10px;
-}
-
-.SignInCol {
-  height: 320px;
-}
-
-.SignUpCol {
-  height: 375px;
 }
