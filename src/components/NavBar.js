@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import logo from '../assets/tc-high-resolution-logo-transparent.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom'
+import { CurrentUserContext } from '../App'
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -50,6 +51,34 @@ const NavBar = () => {
   const isSearchActive = searchOpen
   const isMenuActive = menuOpen
 
+  const currentUser = useContext(CurrentUserContext)
+  const loggedInIcons = <>{currentUser?.username}</>
+  const loggedOutIcons = (
+    <>
+      <NavLink to="/signin" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
+        <i className="fas fa-sign-in-alt"></i>
+        <span className={styles.navLinkText}>Sign in</span>
+      </NavLink>
+      <NavLink to="/signup" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
+        <i className="fas fa-user-plus"></i>
+        <span className={styles.navLinkText}>Sign up</span>
+      </NavLink>
+    </>
+  )
+
+  const loggedOutIconsMobile = (
+    <>
+      <NavLink to="/signin" activeClassName={styles.Active} onClick={closeMenu}>
+        <i className="fas fa-sign-in-alt"></i>
+        <span className={styles.navLinkText}>Sign in</span>
+      </NavLink>
+      <NavLink to="/signup" activeClassName={styles.Active} onClick={closeMenu}>
+        <i className="fas fa-user-plus"></i>
+        <span className={styles.navLinkText}>Sign up</span>
+      </NavLink>
+    </>
+  )
+
   return (
     <>
       <Navbar className={styles.NavBar} expand="md" fixed="top">
@@ -68,21 +97,13 @@ const NavBar = () => {
                   <i className="fas fa-home"></i>
                   <span className={styles.navLinkText}>Home</span>
                 </NavLink>
-                <NavLink to="/signin" activeClassName={styles.Active} onClick={closeMenu}>
-                  <i className="fas fa-sign-in-alt"></i>
-                  <span className={styles.navLinkText}>Sign in</span>
-                </NavLink>
-                <NavLink to="/signup" activeClassName={styles.Active} onClick={closeMenu}>
-                  <i className="fas fa-user-plus"></i>
-                  <span className={styles.navLinkText}>Sign up</span>
-                </NavLink>
+                {currentUser ? loggedInIcons : loggedOutIconsMobile}
                 <div className={styles.searchWrapper} ref={searchRef}>
                   <button
                     onClick={handleSearchToggle}
                     className={`${styles.searchLink} ${
                       isSearchActive ? styles.searchLinkActive : ''
                     }`}
-                    role="button"
                     aria-label="search"
                   >
                     <i className="fas fa-search"></i>
@@ -173,14 +194,7 @@ const NavBar = () => {
             <i className="fas fa-home"></i>
             <span className={styles.navLinkText}>Home</span>
           </NavLink>
-          <NavLink to="/signin" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
-            <i className="fas fa-sign-in-alt"></i>
-            <span className={styles.navLinkText}>Sign in</span>
-          </NavLink>
-          <NavLink to="/signup" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
-            <i className="fas fa-user-plus"></i>
-            <span className={styles.navLinkText}>Sign up</span>
-          </NavLink>
+          {currentUser ? loggedInIcons : loggedOutIcons}
         </Nav>
       </div>
     </>
