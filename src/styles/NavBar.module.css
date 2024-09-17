@@ -15,7 +15,7 @@
   gap: 10px;
   align-items: center;
   position: relative;
-  z-index: 1060; /* Above the backdrop */
+  z-index: 1060;
 }
 
 .desktopMenu .nav-link,
@@ -42,6 +42,9 @@
   font-size: large;
   letter-spacing: 0.0625em;
   color: #777;
+  position: relative;
+  z-index: 2;
+  transition: color 350ms ease;
 }
 
 .navLinkText:hover {
@@ -60,6 +63,45 @@
   text-align: center;
   height: 40px;
   line-height: 1;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 350ms ease;
+}
+
+.menuLink:hover .navLinkText {
+  color: #fff;
+}
+
+.menuLink::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #c9378b;
+  z-index: 1;
+  transition: right 350ms ease;
+}
+
+.menuLink:hover::before {
+  right: 0;
+}
+
+.menuLink::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #c9378b;
+  z-index: 0;
+  transition: left 350ms ease;
+}
+
+.menuLink:hover::after {
+  left: 0;
 }
 
 .menuLinkActive i {
@@ -80,7 +122,7 @@
   background-color: #f8f8f8;
   border: 1px solid #dadadf;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1070; /* Above the backdrop */
+  z-index: 1070;
   border-radius: 4px;
   padding: 10px;
   width: 300px;
@@ -89,7 +131,7 @@
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
-  pointer-events: none; /* Prevent interaction when hidden */
+  pointer-events: none;
 }
 
 .dropdownMenu a {
@@ -99,10 +141,9 @@
 .dropdownMenuOpen {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto; /* Allow interaction when visible */
+  pointer-events: auto;
 }
 
-/* Backdrop styles */
 .backdrop {
   position: fixed;
   top: 0;
@@ -110,7 +151,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1050; /* Below the dropdown menu */
+  z-index: 1050;
   opacity: 0;
   transition: opacity 0.3s ease-out;
 }
