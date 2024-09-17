@@ -105,7 +105,12 @@
 }
 
 .menuLinkActive i {
-  color: #c9378b;
+  transition: color 350ms ease;
+}
+
+.menuLink:hover i {
+  z-index: 1;
+  color: #fff; /* Change icon color on hover */
 }
 
 .menuWrapper {
