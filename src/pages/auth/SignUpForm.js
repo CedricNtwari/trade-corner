@@ -16,6 +16,7 @@ const SignUpForm = () => {
   const { username, password1, password2 } = signUpData
 
   const [errors, setErrors] = useState({})
+  const [success, setSuccess] = useState(false)
 
   const history = useHistory()
 
@@ -30,7 +31,11 @@ const SignUpForm = () => {
     event.preventDefault()
     try {
       await axios.post('/dj-rest-auth/registration/', signUpData)
-      history.push('/signin')
+      setSuccess(true)
+      setErrors({})
+      setTimeout(() => {
+        history.push('/signin')
+      }, 3000)
     } catch (err) {
       if (err.response) {
         console.error('Error response:', err.response.data)
@@ -55,6 +60,11 @@ const SignUpForm = () => {
           <p>
             Fields marked with an <span className={styles.Span}>*</span> are required
           </p>
+          {success && (
+            <Alert variant="success">
+              Registration successful! You will be redirected to the sign-in page shortly.
+            </Alert>
+          )}
 
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username" className={styles.TextInput}>

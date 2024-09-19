@@ -24,6 +24,7 @@ function SignInForm() {
   const { username, password } = signInData
 
   const [errors, setErrors] = useState({})
+  const [successMessage, setSuccessMessage] = useState('')
 
   const history = useHistory()
   const handleSubmit = async (event) => {
@@ -31,9 +32,13 @@ function SignInForm() {
     try {
       const { data } = await axios.post('/dj-rest-auth/login/', signInData)
       setCurrentUser(data.user)
-      history.push('/')
+      setSuccessMessage('You have successfully signed in!')
+      setTimeout(() => {
+        history.push('/')
+      }, 1500)
     } catch (err) {
       setErrors(err.response?.data)
+      setSuccessMessage('')
     }
   }
 
@@ -47,11 +52,17 @@ function SignInForm() {
   return (
     <Row className={styles.Row}>
       <Col>
+        {successMessage && (
+          <Alert variant="success" onClose={() => setSuccessMessage('')} dismissible>
+            {successMessage}
+          </Alert>
+        )}
         <Container>
           <h1 className={styles.Header}>sign in</h1>
           <p>
             Fields marked with an <span className={styles.Span}>*</span> are required
           </p>
+
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username" className={styles.TextInput}>
               <Form.Control
