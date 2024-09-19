@@ -226,10 +226,6 @@
   z-index: 1060;
 }
 
-.NavLink {
-  padding: 5px;
-}
-
 .Active i {
   color: #c9378b;
 }
@@ -239,4 +235,10 @@
   display: grid;
   gap: 10px;
   padding: 10px;
+}
+
+.AlertWrapper {
+  position: fixed;
+  top: 80px;
+  width: 100%;
 }
