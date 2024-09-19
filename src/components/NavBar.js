@@ -3,15 +3,22 @@ import { Navbar, Container, Nav } from 'react-bootstrap'
 import logo from '../assets/tc-high-resolution-logo-transparent.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom'
-import { useCurrentUser } from '../contexts/CurrentUserContext'
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext'
+import Avatar from './Avatar'
+import axios from 'axios'
+import AlertMessage from './AlertMessage'
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [cartCount, setCartCount] = useState(0)
+  const [alert, setAlert] = useState({ message: '', variant: '', show: false })
   const menuRef = useRef(null)
   const searchRef = useRef(null)
   const dropdownRef = useRef(null)
+
+  const currentUser = useCurrentUser()
+  const setCurrentUser = useSetCurrentUser()
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -51,8 +58,73 @@ const NavBar = () => {
   const isSearchActive = searchOpen
   const isMenuActive = menuOpen
 
-  const currentUser = useCurrentUser()
-  const loggedInIcons = <>{currentUser?.username}</>
+  const handleSignOut = async () => {
+    try {
+      await axios.post('dj-rest-auth/logout/')
+      setCurrentUser(null)
+      setAlert({ message: 'You signed out successfully.', variant: 'success', show: true })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const closeAlert = () => setAlert({ ...alert, show: false })
+
+  const shopNowIcon = (
+    <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/products/">
+      <i className="fas fa-store"></i>Shop Now
+    </NavLink>
+  )
+  const loggedInIcons = (
+    <>
+      <NavLink
+        className={styles.NavLink}
+        to={`/profiles/${currentUser?.profile_id}`}
+        onClick={() => setMenuOpen(false)}
+      >
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        to="/"
+        onClick={() => {
+          handleSignOut()
+          setMenuOpen(false)
+        }}
+      >
+        <i className="fas fa-sign-out-alt"></i> Sign out
+      </NavLink>
+    </>
+  )
+  const loggedInIconsMobile = (
+    <>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/products/"
+        onClick={closeMenu}
+      >
+        <i className="fas fa-store"></i>Shop Now
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        to={`/profiles/${currentUser?.profile_id}`}
+        onClick={closeMenu}
+      >
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        to="/"
+        onClick={() => {
+          handleSignOut()
+          closeMenu()
+        }}
+      >
+        <i className="fas fa-sign-out-alt"></i> Sign out
+      </NavLink>
+    </>
+  )
   const loggedOutIcons = (
     <>
       <NavLink to="/signin" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
@@ -81,6 +153,12 @@ const NavBar = () => {
 
   return (
     <>
+      {alert.show && (
+        <div className={styles.AlertWrapper}>
+          <AlertMessage message={alert.message} variant={alert.variant} onClose={closeAlert} />
+        </div>
+      )}
+
       <Navbar className={styles.NavBar} expand="md" fixed="top">
         <Container className={styles.container}>
           <NavLink to="/">
@@ -97,7 +175,7 @@ const NavBar = () => {
                   <i className="fas fa-home"></i>
                   <span className={styles.navLinkText}>Home</span>
                 </NavLink>
-                {currentUser ? loggedInIcons : loggedOutIconsMobile}
+                {currentUser ? loggedInIconsMobile : loggedOutIconsMobile}
                 <div className={styles.searchWrapper} ref={searchRef}>
                   <button
                     onClick={handleSearchToggle}
@@ -133,6 +211,7 @@ const NavBar = () => {
               </div>
               {/* Desktop Links as Dropdown Menu */}
               <div className={`d-none d-md-flex ${styles.desktopMenu}`}>
+                {currentUser && shopNowIcon}
                 <div className={styles.searchWrapper} ref={searchRef}>
                   <button
                     onClick={handleSearchToggle}
