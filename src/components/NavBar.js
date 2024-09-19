@@ -7,14 +7,13 @@ import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContex
 import Avatar from './Avatar'
 import axios from 'axios'
 import AlertMessage from './AlertMessage'
+import useClickOutsideToggle from '../hooks/useClickOutsideToggle'
 
 const NavBar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
+  const { menuOpen, setMenuOpen, searchOpen, setSearchOpen, menuRef, searchRef } =
+    useClickOutsideToggle()
   const [cartCount, setCartCount] = useState(0)
   const [alert, setAlert] = useState({ message: '', variant: '', show: false })
-  const menuRef = useRef(null)
-  const searchRef = useRef(null)
   const dropdownRef = useRef(null)
 
   const currentUser = useCurrentUser()
@@ -54,9 +53,6 @@ const NavBar = () => {
       toggle.click()
     }
   }
-
-  const isSearchActive = searchOpen
-  const isMenuActive = menuOpen
 
   const handleSignOut = async () => {
     try {
@@ -179,9 +175,7 @@ const NavBar = () => {
                 <div className={styles.searchWrapper} ref={searchRef}>
                   <button
                     onClick={handleSearchToggle}
-                    className={`${styles.searchLink} ${
-                      isSearchActive ? styles.searchLinkActive : ''
-                    }`}
+                    className={`${styles.searchLink} ${searchOpen ? styles.searchLinkActive : ''}`}
                     aria-label="search"
                   >
                     <i className="fas fa-search"></i>
@@ -215,9 +209,7 @@ const NavBar = () => {
                 <div className={styles.searchWrapper} ref={searchRef}>
                   <button
                     onClick={handleSearchToggle}
-                    className={`${styles.searchLink} ${
-                      isSearchActive ? styles.searchLinkActive : ''
-                    }`}
+                    className={`${styles.searchLink} ${searchOpen ? styles.searchLinkActive : ''}`}
                   >
                     <i className="fas fa-search"></i>
                   </button>
@@ -247,7 +239,7 @@ const NavBar = () => {
                 <div className={styles.menuWrapper} ref={menuRef}>
                   <button
                     onClick={handleMenuToggle}
-                    className={`${styles.menuLink} ${isMenuActive ? styles.menuLinkActive : ''}`}
+                    className={`${styles.menuLink} ${menuOpen ? styles.menuLinkActive : ''}`}
                   >
                     <span className={styles.navLinkText}>Menu </span>
                     <i className="fas fa-bars"></i>
