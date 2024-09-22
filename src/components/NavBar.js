@@ -7,18 +7,20 @@ import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContex
 import Avatar from './Avatar'
 import axios from 'axios'
 import AlertMessage from './AlertMessage'
-import useClickOutsideToggle from '../hooks/useClickOutsideToggle'
 
 const NavBar = () => {
-  const { menuOpen, setMenuOpen, searchOpen, setSearchOpen, menuRef, searchRef } =
-    useClickOutsideToggle()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const [cartCount, setCartCount] = useState(0)
   const [alert, setAlert] = useState({ message: '', variant: '', show: false })
+  const menuRef = useRef(null)
+  const searchRef = useRef(null)
   const dropdownRef = useRef(null)
 
   const currentUser = useCurrentUser()
   const setCurrentUser = useSetCurrentUser()
 
+  // TODO: Refactor the NavBar component to use useClickOutsideToggle hook for handling click outside
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
