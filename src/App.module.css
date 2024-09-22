@@ -9,7 +9,6 @@
 
 .Main {
   flex: 1;
-  padding-top: 81px;
 }
 
 * {
@@ -41,6 +40,22 @@ i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
   color: #c9378b;
+}
+
+h3 {
+  font-size: 1.625rem;
+  line-height: 1.2142857143em;
+  letter-spacing: 0.02857142857em;
+}
+
+.p {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .p {
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* Specific Roboto font styles */

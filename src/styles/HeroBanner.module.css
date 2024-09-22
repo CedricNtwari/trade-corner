@@ -1,0 +1,67 @@
+.carousel {
+  margin-bottom: 30px;
+}
+
+.caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.carousel img {
+  object-fit: cover;
+  height: 70vh;
+}
+
+@media (max-width: 768px) {
+  .caption {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .caption h3 {
+    font-size: 18px;
+  }
+
+  .caption p {
+    font-size: 12px;
+  }
+
+  .carousel img {
+    height: 50vh;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 12% !important;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .carousel-caption {
+    bottom: 10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel img {
+    height: 40vh;
+  }
+
+  .caption h3 {
+    font-size: 16px;
+  }
+
+  .caption p {
+    font-size: 10px;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 15% !important;
+  }
+}

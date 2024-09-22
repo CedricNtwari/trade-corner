@@ -28,7 +28,6 @@
 
 .Button:focus {
   background-color: #c9378b;
-  border-color: #f6d1ee;
 }
 
 .Wide {
@@ -41,7 +40,6 @@
 .Bright:hover {
   background-color: #c9378b;
   color: #ffffff;
-  border-color: #f6d1ee !important;
 }
 
 .BlueOutline,
