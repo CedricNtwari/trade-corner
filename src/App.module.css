@@ -50,6 +50,7 @@ h3 {
 
 .p {
   margin-bottom: 0.5rem;
+  letter-spacing: 0.03043478261em;
 }
 
 @media (min-width: 768px) {

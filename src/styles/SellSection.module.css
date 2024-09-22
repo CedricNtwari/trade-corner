@@ -1,0 +1,62 @@
+.sellSection {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.imageWrapper {
+  width: 100%;
+}
+
+.image {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.textWrapper {
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.subTitle {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.link {
+  color: #c9378b;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .contentWrapper {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .textWrapper {
+    text-align: left;
+    padding-left: 20px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .subTitle {
+    font-size: 18px;
+  }
+}

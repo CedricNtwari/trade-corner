@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, Button } from 'react-bootstrap'
+import { Carousel } from 'react-bootstrap'
 import styles from '../styles/HeroBanner.module.css'
 import btnStyles from '../styles/Button.module.css'
 import { useHistory } from 'react-router-dom'
