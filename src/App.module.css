@@ -43,6 +43,12 @@ i:hover {
 }
 
 h3 {
+  font-size: 2rem;
+  line-height: 1.25em;
+  letter-spacing: 0.03125em;
+}
+
+h3 {
   font-size: 24px;
   line-height: 1.2142857143em;
   letter-spacing: 0.02857142857em;

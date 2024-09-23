@@ -1,6 +1,6 @@
 .infoSection {
   padding: 10px 0;
-  background-color: #f6d1ee;
+  background-color: #999999;
 }
 
 .featureCol {
@@ -19,7 +19,6 @@
 p {
   margin: 0;
   font-size: 1rem;
-  color: #333;
 }
 
 @media (max-width: 768px) {

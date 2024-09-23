@@ -4,7 +4,7 @@ import styles from '../styles/PhilosophySection.module.css'
 const PhilosophySection = () => {
   return (
     <section className={styles.philosophySection}>
-      <h2 className={styles.title}>Our Philosophy</h2>
+      <h3 className={styles.title}>Our Philosophy</h3>
       <p className={styles.description}>
         We at Trade Corner want to set an example for the environment and stop the throwaway
         madness. By reusing items, we consume more intelligently and thus make our contribution to
