@@ -3,6 +3,7 @@ import HeroBanner from '../../components/HeroBanner'
 import SellSection from '../../components/SellSection'
 import CategoriesSection from '../../components/CategoriesSection'
 import InfoFeaturesSection from '../../components/InfoFeaturesSection'
+import PhilosophySection from '../../components/PhilosophySection'
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
       <SellSection />
       <CategoriesSection />
       <InfoFeaturesSection />
+      <PhilosophySection />
 
       {/* Additional content for HomePage */}
     </div>
