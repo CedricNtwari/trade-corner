@@ -8,6 +8,9 @@ import SignInForm from './pages/auth/SignInForm'
 import ProductsPage from './pages/products/ProductsPage'
 import ProfilePage from './pages/profiles/ProfilePage'
 import HomePage from './pages/home/HomePage'
+import FAQ from './pages/footer/FAQ'
+import TermsConditions from './pages/footer/TermsConditions'
+import PrivacyPolicy from './pages/footer/PrivacyPolicy'
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
           <Route exact path="/cart" render={() => <h1>Shopping Cart</h1>} />
           <Route exact path="/products" component={ProductsPage} />
           <Route path="/profiles/:id" component={ProfilePage} />
+          <Route exact path="/faq" component={FAQ} />
+          <Route exact path="/terms-and-conditions" component={TermsConditions} />
+          <Route exact path="/privacy-policy" component={PrivacyPolicy} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </div>

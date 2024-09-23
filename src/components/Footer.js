@@ -41,16 +41,15 @@ const Footer = () => {
                   Shipping
                 </button>
               </li>
-              <li>
-                <a href="/sizing">Sizing</a>
-              </li>
             </ul>
           </Col>
           <Col xs={12} md={4}>
             <h4>Legal</h4>
             <ul>
               <li>
-                <a href="/imprint">Imprint</a>
+                <button onClick={() => openModal('Imprint')} className={styles.linkButton}>
+                  Imprint
+                </button>
               </li>
               <li>
                 <a href="/terms-and-conditions">Terms & Conditions</a>
@@ -108,6 +107,17 @@ const Footer = () => {
             {modalContent === 'Shipping' && (
               <p>
                 All articles are sent by A-Post. You will receive the product within 1-3 days...
+              </p>
+            )}
+            {modalContent === 'Imprint' && (
+              <p>
+                Trade Corner
+                <br />
+                Seestrasse 80
+                <br />
+                8806 SZ, Switzerland
+                <br />
+                E-Mail: ntwaricedric@gmail.com
               </p>
             )}
           </Modal.Body>
