@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Container, Row, Col, Modal, Button } from 'react-bootstrap'
 import { FaFacebookF, FaInstagram, FaYoutube, FaPinterestP } from 'react-icons/fa'
 import styles from '../styles/Footer.module.css'
+import modalStyles from '../styles/SignInUpForm.module.css'
+import btnStyles from '../styles/Button.module.css'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -93,11 +95,11 @@ const Footer = () => {
         </Row>
 
         {/* Modal for displaying overlay content */}
-        <Modal show={showModal} onHide={closeModal}>
-          <Modal.Header closeButton>
+        <Modal show={showModal} onHide={closeModal} centered>
+          <Modal.Header closeButton className={modalStyles.Header}>
             <Modal.Title>{modalContent}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className={modalStyles.Paragraph}>
             {modalContent === 'Returns' && (
               <p>
                 The clothes can be returned within 30 days of receipt, as long as we receive the
@@ -122,7 +124,7 @@ const Footer = () => {
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={closeModal}>
+            <Button className={`${btnStyles.Button} ${btnStyles.Bright}`} onClick={closeModal}>
               Close
             </Button>
           </Modal.Footer>
