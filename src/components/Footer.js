@@ -65,10 +65,7 @@ const Footer = () => {
             <h4>Contact Us</h4>
             <ul>
               <li>
-                <a href="/contact">Contact Form</a>
-              </li>
-              <li>
-                <a href="/newsletter">Newsletter</a>
+                <a href="/contact-us">Contact Form</a>
               </li>
             </ul>
           </Col>
