@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import logo from '../assets/tc-high-resolution-logo-transparent.png'
 import styles from '../styles/NavBar.module.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext'
 import Avatar from './Avatar'
 import axios from 'axios'
@@ -16,6 +16,7 @@ const NavBar = () => {
   const menuRef = useRef(null)
   const searchRef = useRef(null)
   const dropdownRef = useRef(null)
+  const history = useHistory()
 
   const currentUser = useCurrentUser()
   const setCurrentUser = useSetCurrentUser()
@@ -61,6 +62,10 @@ const NavBar = () => {
       await axios.post('dj-rest-auth/logout/')
       setCurrentUser(null)
       setAlert({ message: 'You signed out successfully.', variant: 'success', show: true })
+      setTimeout(() => {
+        setAlert({ message: '', variant: '', show: false })
+      }, 2000)
+      history.push('/')
     } catch (err) {
       console.log(err)
     }

@@ -35,7 +35,7 @@ function SignInForm() {
       setSuccessMessage('You have successfully signed in!')
       setTimeout(() => {
         history.push('/')
-      }, 1500)
+      }, 2000)
     } catch (err) {
       setErrors(err.response?.data)
       setSuccessMessage('')
