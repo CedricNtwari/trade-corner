@@ -74,10 +74,16 @@ const NavBar = () => {
   const closeAlert = () => setAlert({ ...alert, show: false })
 
   const shopNowIcon = (
-    <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/products/">
-      <i className="fas fa-store"></i>Shop Now
-    </NavLink>
+    <>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/products/">
+        <i className="fas fa-store"></i>Shop Now
+      </NavLink>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/add-product/">
+        <i className="fas fa-plus-circle"></i>Add Product
+      </NavLink>
+    </>
   )
+
   const loggedInIcons = (
     <>
       <NavLink
@@ -111,6 +117,14 @@ const NavBar = () => {
       </NavLink>
       <NavLink
         className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/add-product/"
+        onClick={closeMenu}
+      >
+        <i className="fas fa-plus-circle"></i>Add Product
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
         onClick={closeMenu}
       >
@@ -128,6 +142,7 @@ const NavBar = () => {
       </NavLink>
     </>
   )
+
   const loggedOutIcons = (
     <>
       <NavLink to="/signin" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
