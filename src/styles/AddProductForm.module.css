@@ -1,0 +1,84 @@
+/* Wrapper for the entire form */
+.Form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the form header */
+.Header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: #c9378b; /* Use your primary color */
+  margin-bottom: 20px;
+}
+
+/* Common input styles */
+.FormControl {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #c9378b; /* Use your primary color for focus */
+  outline: none;
+  box-shadow: none;
+}
+
+/* File input specific styles */
+input[type="file"] {
+  display: block;
+  margin-top: 10px;
+}
+
+/* Label styles */
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}
+
+/* Add some margin to the bottom of the button */
+.Button {
+  margin-bottom: 15px;
+}
+
+/* Error message styling */
+.ErrorMessage {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .Form {
+    padding: 15px;
+  }
+
+  .Header {
+    font-size: 1.6rem;
+  }
+}

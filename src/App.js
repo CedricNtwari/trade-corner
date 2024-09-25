@@ -12,6 +12,7 @@ import FAQ from './pages/footer/FAQ'
 import TermsConditions from './pages/footer/TermsConditions'
 import PrivacyPolicy from './pages/footer/PrivacyPolicy'
 import ContactUs from './pages/footer/ContactUs'
+import AddProduct from './pages/products/AddProductForm'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/terms-and-conditions" component={TermsConditions} />
           <Route exact path="/privacy-policy" component={PrivacyPolicy} />
           <Route exact path="/contact-us" component={ContactUs} />
+          <Route exact path="/add-product" component={AddProduct} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </div>
