@@ -14,6 +14,7 @@ import PrivacyPolicy from './pages/footer/PrivacyPolicy'
 import ContactUs from './pages/footer/ContactUs'
 import AddProduct from './pages/products/AddProductForm'
 import EditProductPage from './pages/products/EditProductPage'
+import ProductDetailsPage from './pages/products/ProductDetailPage'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/contact-us" component={ContactUs} />
           <Route exact path="/add-product" component={AddProduct} />
           <Route path="/products/edit/:id" component={EditProductPage} />
+          <Route path="/products/:id" component={ProductDetailsPage} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </div>
