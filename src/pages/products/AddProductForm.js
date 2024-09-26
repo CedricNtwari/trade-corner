@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -12,6 +12,7 @@ import styles from '../../styles/SignInUpForm.module.css'
 import btnStyles from '../../styles/Button.module.css'
 
 const AddProductForm = () => {
+  const { id } = useParams()
   const [productData, setProductData] = useState({
     name: '',
     description: '',
@@ -29,6 +30,20 @@ const AddProductForm = () => {
   const [successMessage, setSuccessMessage] = useState('')
   const [errors, setErrors] = useState({})
   const history = useHistory()
+
+  useEffect(() => {
+    if (id) {
+      const fetchProduct = async () => {
+        try {
+          const { data } = await axios.get(`/products/${id}/`)
+          setProductData(data)
+        } catch (err) {
+          console.error('Failed to load product', err)
+        }
+      }
+      fetchProduct()
+    }
+  }, [id])
 
   const handleChange = (e) => {
     setProductData({
@@ -64,8 +79,12 @@ const AddProductForm = () => {
     }
 
     try {
-      await axios.post('/products/', formData)
-      setSuccessMessage('Product created successfully!')
+      if (id) {
+        await axios.put(`/products/${id}/`, formData)
+      } else {
+        await axios.post('/products/', formData)
+        setSuccessMessage('Product created successfully!')
+      }
       setTimeout(() => {
         setSuccessMessage('')
         history.push('/products')
@@ -80,7 +99,7 @@ const AddProductForm = () => {
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
-          <h2 className={styles.Header}>Add a Product</h2>
+          <h2 className={styles.Header}>{id ? 'Edit Product' : 'Add a Product'}</h2>
 
           <Form onSubmit={handleSubmit} className={styles.Form}>
             <Row>
@@ -281,7 +300,7 @@ const AddProductForm = () => {
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright} mb-5`}
               type="submit"
             >
-              Add Product
+              {id ? 'Update Product' : 'Add Product'}
             </Button>
           </Form>
         </Col>
