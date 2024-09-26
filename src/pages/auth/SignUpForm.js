@@ -54,6 +54,13 @@ const SignUpForm = () => {
 
   return (
     <Row className={styles.Row}>
+      <Col lg={6} className={`d-none d-lg-block ${styles.ImageCol}`}>
+        <img
+          src="https://res.cloudinary.com/dexabr21b/image/upload/v1727363734/StockCake-Bustling_Flea_Market_1727363721_p0uvoo.jpg"
+          alt="Sign in illustration"
+          className={styles.SideImage}
+        />
+      </Col>
       <Col>
         <Container>
           <h1 className={styles.Header}>sign up</h1>

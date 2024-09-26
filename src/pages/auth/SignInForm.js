@@ -51,18 +51,24 @@ function SignInForm() {
 
   return (
     <Row className={styles.Row}>
-      <Col>
+      <Col lg={6} className={`d-none d-lg-block ${styles.ImageCol}`}>
+        <img
+          src="https://res.cloudinary.com/dexabr21b/image/upload/v1727363682/StockCake-Bustling_Thrift_Shop_1727363668_faapl5.jpg"
+          alt="Sign in illustration"
+          className={styles.SideImage}
+        />
+      </Col>
+      <Col lg={6} className={styles.FormCol}>
         {successMessage && (
           <Alert variant="success" onClose={() => setSuccessMessage('')} dismissible>
             {successMessage}
           </Alert>
         )}
         <Container>
-          <h1 className={styles.Header}>sign in</h1>
+          <h1 className={styles.Header}>Sign In</h1>
           <p>
             Fields marked with an <span className={styles.Span}>*</span> are required
           </p>
-
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username" className={styles.TextInput}>
               <Form.Control
@@ -101,6 +107,7 @@ function SignInForm() {
                 {message}
               </Alert>
             ))}
+
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"

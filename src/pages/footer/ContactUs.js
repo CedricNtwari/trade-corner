@@ -46,6 +46,13 @@ function ContactUs() {
 
   return (
     <Row className={styles.Row}>
+      <Col lg={6} className={`d-none d-lg-block ${styles.ImageCol}`}>
+        <img
+          src="https://res.cloudinary.com/dexabr21b/image/upload/v1727363701/StockCake-Contact_Us_Button_1727363631_rk8cxc.jpg"
+          alt="Sign in illustration"
+          className={styles.SideImage}
+        />
+      </Col>
       <Col>
         {successMessage && (
           <Alert variant="success" onClose={() => setSuccessMessage('')} dismissible>
