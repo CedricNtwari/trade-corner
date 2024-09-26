@@ -28,6 +28,7 @@
 
 .Button:focus {
   background-color: #c9378b;
+  color: #ffffff;
 }
 
 .Wide {

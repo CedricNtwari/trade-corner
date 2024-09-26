@@ -118,10 +118,6 @@ h3 {
   object-fit: contain;
 }
 
-input[type="file"] {
-  display: none;
-}
-
 figure {
   text-align: center;
   display: inline-block;
