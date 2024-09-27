@@ -15,6 +15,7 @@ import ContactUs from './pages/footer/ContactUs'
 import AddProduct from './pages/products/AddProductForm'
 import EditProductPage from './pages/products/EditProductPage'
 import ProductDetailsPage from './pages/products/ProductDetailPage'
+import CartPage from './pages/cart/CartPage'
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/cart" render={() => <h1>Shopping Cart</h1>} />
+          <Route exact path="/cart" component={CartPage} />
           <Route exact path="/products" component={ProductsPage} />
           <Route path="/profiles/:id" component={ProfilePage} />
           <Route exact path="/faq" component={FAQ} />
