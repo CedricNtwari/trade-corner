@@ -81,3 +81,16 @@
   background-color: #c9378b;
   color: #ffffff;
 }
+
+.Button:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.Button.Bright:disabled {
+  background-color: #f6d1ee;
+  color: #c9378b;
+  cursor: not-allowed;
+}
