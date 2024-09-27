@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import styles from '../../styles/ProductDetailPage.module.css'
 import btnStyles from '../../styles/Button.module.css'
-import { useSetCart } from '../../contexts/CartContext'
+import { useCart, useSetCart } from '../../contexts/CartContext'
 import { Alert } from 'react-bootstrap'
 
 const ProductDetailPage = () => {
@@ -14,6 +14,10 @@ const ProductDetailPage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const { addToCart, alertMessage } = useSetCart()
+  const { cart } = useCart()
+
+  const existingCartItem = cart?.items.find((item) => item.product.id === product?.id)
+  const disableAddToCart = existingCartItem && existingCartItem.quantity >= product?.stock
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -32,11 +36,7 @@ const ProductDetailPage = () => {
   }, [id])
 
   const handleAddToCart = () => {
-    if (product && product.stock > 0) {
-      addToCart(product.id, product.stock, 1) // Default quantity = 1
-    } else {
-      setError('Out of stock')
-    }
+    addToCart(product.id, product.stock)
   }
 
   const handleProductClick = (productId) => {
@@ -72,8 +72,9 @@ const ProductDetailPage = () => {
                 <button
                   className={`btn ${btnStyles.Button} ${btnStyles.Bright}`}
                   onClick={handleAddToCart}
+                  disabled={disableAddToCart}
                 >
-                  Add to Cart
+                  {disableAddToCart ? 'Max stock in cart' : 'Add to Cart'}
                 </button>
               </div>
               {alertMessage && (

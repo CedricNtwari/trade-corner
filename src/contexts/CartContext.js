@@ -38,6 +38,24 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (productId, stock, quantity = 1) => {
     try {
+      const existingItem = cart?.items.find((item) => item.product.id === productId)
+
+      if (existingItem && existingItem.quantity >= stock) {
+        showAlert(
+          'error',
+          `Sorry, only ${stock} item(s) available in stock. You already have the maximum in your cart.`,
+        )
+        return
+      }
+
+      if (quantity > stock) {
+        showAlert(
+          'error',
+          `Sorry, only ${stock} item(s) available in stock. You cannot add more than that.`,
+        )
+        return
+      }
+
       await axiosRes.post(`/carts/add_item/`, {
         product: productId,
         quantity: Math.min(quantity, stock),
