@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import styles from '../../styles/ProductDetailPage.module.css'
 import btnStyles from '../../styles/Button.module.css'
+import { useSetCart } from '../../contexts/CartContext'
+import { Alert } from 'react-bootstrap'
 
 const ProductDetailPage = () => {
   const { id } = useParams()
@@ -11,6 +13,7 @@ const ProductDetailPage = () => {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { addToCart, alertMessage } = useSetCart()
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -27,6 +30,14 @@ const ProductDetailPage = () => {
     }
     fetchProduct()
   }, [id])
+
+  const handleAddToCart = () => {
+    if (product && product.stock > 0) {
+      addToCart(product.id, product.stock, 1) // Default quantity = 1
+    } else {
+      setError('Out of stock')
+    }
+  }
 
   const handleProductClick = (productId) => {
     history.push(`/products/${productId}`)
@@ -51,22 +62,25 @@ const ProductDetailPage = () => {
               <h1>{product.name}</h1>
               <div className={styles.PriceSection}>
                 <span className={styles.CurrentPrice}>
-                  CHF {product.price ? parseFloat(product.price).toFixed(2) : '0.00'}
+                  USD {product.price ? parseFloat(product.price).toFixed(2) : '0.00'}
                 </span>
-                {product.original_price && (
-                  <span className={styles.OriginalPrice}>
-                    CHF {parseFloat(product.original_price).toFixed(2)}
-                  </span>
-                )}
               </div>
               <p>{product.description}</p>
               <p>Seller: {product.owner}</p>
               <p>In stock: {product.stock}</p>
               <div>
-                <button className={`btn ${btnStyles.Button} ${btnStyles.Bright}`}>
+                <button
+                  className={`btn ${btnStyles.Button} ${btnStyles.Bright}`}
+                  onClick={handleAddToCart}
+                >
                   Add to Cart
                 </button>
               </div>
+              {alertMessage && (
+                <Alert variant={alertMessage.type === 'error' ? 'danger' : 'success'}>
+                  {alertMessage.message}
+                </Alert>
+              )}
             </div>
           </div>
 
@@ -86,7 +100,7 @@ const ProductDetailPage = () => {
                       className={styles.ProductImage}
                     />
                     <p>{relatedProduct.name}</p>
-                    <p>CHF {parseFloat(relatedProduct.price).toFixed(2)}</p>
+                    <p>USD {parseFloat(relatedProduct.price).toFixed(2)}</p>
                   </div>
                 ))}
               </div>

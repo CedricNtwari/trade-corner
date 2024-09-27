@@ -7,16 +7,18 @@ import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContex
 import Avatar from './Avatar'
 import axios from 'axios'
 import AlertMessage from './AlertMessage'
+import { useCart, useSetCart } from '../contexts/CartContext'
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
-  const [cartCount, setCartCount] = useState(0)
   const [alert, setAlert] = useState({ message: '', variant: '', show: false })
   const menuRef = useRef(null)
   const searchRef = useRef(null)
   const dropdownRef = useRef(null)
   const history = useHistory()
+  const { cartCount } = useCart()
+  const { clearCart } = useSetCart()
 
   const currentUser = useCurrentUser()
   const setCurrentUser = useSetCurrentUser()
@@ -61,6 +63,7 @@ const NavBar = () => {
     try {
       await axios.post('dj-rest-auth/logout/')
       setCurrentUser(null)
+      clearCart()
       setAlert({ message: 'You signed out successfully.', variant: 'success', show: true })
       setTimeout(() => {
         setAlert({ message: '', variant: '', show: false })
@@ -218,6 +221,9 @@ const NavBar = () => {
                   <NavLink
                     className={styles.navLinkCart}
                     activeClassName={styles.Active}
+                    role="link"
+                    aria-label="shopping-cart"
+                    onClick={closeMenu}
                     to="/cart"
                   >
                     <i className="fas fa-shopping-cart"></i>

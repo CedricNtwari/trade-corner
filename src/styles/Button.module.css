@@ -66,3 +66,18 @@
   background-color: #f6d1ee;
   color: #c9378b;
 }
+
+.Darker {
+  background-color: #c9378b;
+  color: #f6d1ee;
+}
+
+.Darker:hover {
+  background-color: #eac3e4;
+  color: #c9378b;
+}
+
+.Darker:focus {
+  background-color: #c9378b;
+  color: #ffffff;
+}
