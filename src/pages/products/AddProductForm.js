@@ -31,19 +31,48 @@ const AddProductForm = () => {
   const [errors, setErrors] = useState({})
   const history = useHistory()
 
-  useEffect(() => {
-    if (id) {
-      const fetchProduct = async () => {
-        try {
-          const { data } = await axios.get(`/products/${id}/`)
-          setProductData(data)
-        } catch (err) {
-          console.error('Failed to load product', err)
-        }
-      }
-      fetchProduct()
+  const validateForm = () => {
+    let formErrors = {}
+
+    if (!/^[a-zA-Z\s]+$/.test(productData.name)) {
+      formErrors.name = ['Product name should contain only letters and spaces.']
     }
-  }, [id])
+
+    if (productData.description.length < 10) {
+      formErrors.description = ['Description should be at least 10 characters long.']
+    }
+
+    if (isNaN(productData.price) || productData.price <= 0) {
+      formErrors.price = ['Price should be a positive number.']
+    }
+
+    if (
+      isNaN(productData.stock) ||
+      productData.stock <= 0 ||
+      !Number.isInteger(Number(productData.stock))
+    ) {
+      formErrors.stock = ['Stock should be a positive integer.']
+    }
+
+    if (!productData.category) {
+      formErrors.category = ['Please select a valid category.']
+    }
+
+    if (!productData.size) {
+      formErrors.size = ['Please select a valid size.']
+    }
+
+    if (isNaN(productData.postal_code)) {
+      formErrors.postal_code = ['Postal code should contain only numbers.']
+    }
+
+    if (productData.image && !/\.(jpg|jpeg|png)$/i.test(productData.image.name)) {
+      formErrors.image = ['Please upload a valid image file (jpg, jpeg, or png).']
+    }
+
+    setErrors(formErrors)
+    return Object.keys(formErrors).length === 0
+  }
 
   const handleChange = (e) => {
     setProductData({
@@ -61,6 +90,9 @@ const AddProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (!validateForm()) return
+
     const formData = new FormData()
 
     formData.append('name', productData.name)
@@ -93,6 +125,20 @@ const AddProductForm = () => {
       setErrors(err.response?.data || {})
     }
   }
+
+  useEffect(() => {
+    if (id) {
+      const fetchProduct = async () => {
+        try {
+          const { data } = await axios.get(`/products/${id}/`)
+          setProductData(data)
+        } catch (err) {
+          console.error('Failed to load product', err)
+        }
+      }
+      fetchProduct()
+    }
+  }, [id])
 
   return (
     <Container className="mt-5">
@@ -228,6 +274,11 @@ const AddProductForm = () => {
                     className={styles.Input}
                     required
                   />
+                  {errors.image?.map((message, idx) => (
+                    <div key={idx} className={styles.ErrorMessage}>
+                      {message}
+                    </div>
+                  ))}
                 </Form.Group>
               </Col>
             </Row>
@@ -292,10 +343,14 @@ const AddProductForm = () => {
                     className={styles.Input}
                     required
                   />
+                  {errors.postal_code?.map((message, idx) => (
+                    <div key={idx} className={styles.ErrorMessage}>
+                      {message}
+                    </div>
+                  ))}
                 </Form.Group>
               </Col>
             </Row>
-
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright} mb-5`}
               type="submit"
