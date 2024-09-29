@@ -25,6 +25,16 @@ const CheckoutPage = () => {
         setTimeout(() => {
           setError(null)
         }, 3000)
+      } else {
+        const orderData = {
+          total_price: cart.total,
+          order_items: cart.items.map((item) => ({
+            product: item.product.id,
+            quantity: item.quantity,
+            price: item.product.price,
+          })),
+        }
+        await axios.post('/orders/', orderData)
       }
     } catch (error) {
       setError('Failed to create checkout session')

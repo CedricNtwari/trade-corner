@@ -18,6 +18,7 @@ import ProductDetailsPage from './pages/products/ProductDetailPage'
 import CartPage from './pages/cart/CartPage'
 import PaymentSuccess from './pages/checkout/PaymentSuccess'
 import PaymentFailure from './pages/checkout/PaymentFailure'
+import OrderPage from './pages/orders/OrderPage'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/payment-failure" component={PaymentFailure} />
           <Route exact path="/products" component={ProductsPage} />
           <Route path="/profiles/:id" component={ProfilePage} />
+          <Route exact path="/orders" component={OrderPage} />
           <Route exact path="/faq" component={FAQ} />
           <Route exact path="/terms-and-conditions" component={TermsConditions} />
           <Route exact path="/privacy-policy" component={PrivacyPolicy} />
