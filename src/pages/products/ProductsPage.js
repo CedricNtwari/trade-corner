@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { axiosRes } from '../../api/axiosDefaults'
 import styles from '../../styles/ProductsPage.module.css'
 import btnStyles from '../../styles/Button.module.css'
+import LoadingSpinner from '../../components/LoadingSpinner'
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([])
@@ -39,8 +40,13 @@ const ProductsPage = () => {
     history.push(`/products/${productId}`)
   }
 
-  if (loading) return <p>Loading products...</p>
-  if (error) return <p>{error}</p>
+  if (loading) {
+    return <LoadingSpinner message="Loading products..." />
+  }
+
+  if (error) {
+    return <p>{error}</p>
+  }
 
   return (
     <div className={styles.ProductsPage}>

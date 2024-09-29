@@ -4,6 +4,7 @@ import axios from 'axios'
 import ProfileHeader from './ProfileHeader'
 import PersonalDetails from './PersonalDetails'
 import UserProducts from './UserProducts'
+import LoadingSpinner from '../../components/LoadingSpinner'
 import styles from '../../styles/ProfilePage.module.css'
 
 const ProfilePage = () => {
@@ -27,8 +28,13 @@ const ProfilePage = () => {
     fetchProfile()
   }, [id])
 
-  if (loading) return <p>Loading profile...</p>
-  if (error) return <p>{error}</p>
+  if (loading) {
+    return <LoadingSpinner message="Loading profile..." />
+  }
+
+  if (error) {
+    return <p>{error}</p>
+  }
 
   return (
     <div className={styles.ProfilePage}>

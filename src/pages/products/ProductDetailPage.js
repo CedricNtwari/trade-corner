@@ -5,6 +5,7 @@ import styles from '../../styles/ProductDetailPage.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import { useCart, useSetCart } from '../../contexts/CartContext'
 import { Alert } from 'react-bootstrap'
+import LoadingSpinner from '../../components/LoadingSpinner'
 
 const ProductDetailPage = () => {
   const { id } = useParams()
@@ -43,8 +44,13 @@ const ProductDetailPage = () => {
     history.push(`/products/${productId}`)
   }
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>{error}</p>
+  if (loading) {
+    return <LoadingSpinner message="Loading product details..." />
+  }
+
+  if (error) {
+    return <p>{error}</p>
+  }
 
   return (
     <div className={styles.ProductDetailPage}>
