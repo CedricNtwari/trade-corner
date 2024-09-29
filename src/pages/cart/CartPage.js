@@ -1,13 +1,31 @@
+import React, { useState, useEffect } from 'react'
 import { useCart, useSetCart } from '../../contexts/CartContext'
 import styles from '../../styles/CartPage.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import { Alert } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+import { loadStripe } from '@stripe/stripe-js'
+import LoadingSpinner from '../../components/LoadingSpinner'
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
 
 const CartPage = () => {
   const { cart } = useCart()
-  const { removeFromCart, updateQuantity, alertMessage } = useSetCart()
+  const { removeFromCart, updateQuantity, alertMessage, setAlertMessage } = useSetCart()
   const history = useHistory()
+  const [loading, setLoading] = useState(false)
+  const [checkoutError, setCheckoutError] = useState(null)
+
+  useEffect(() => {
+    if (alertMessage) {
+      const timer = setTimeout(() => {
+        setAlertMessage(null)
+      }, 3000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [alertMessage, setAlertMessage])
 
   const handleQuantityChange = (itemId, stock, newQuantity) => {
     const validQuantity = Math.min(newQuantity, stock)
@@ -16,6 +34,24 @@ const CartPage = () => {
 
   const handleProductClick = (productId) => {
     history.push(`/products/${productId}`)
+  }
+
+  const handleCheckout = async () => {
+    setLoading(true)
+
+    try {
+      const { data } = await axios.post('/create-checkout-session/', { cart })
+      const stripe = await stripePromise
+      const result = await stripe.redirectToCheckout({ sessionId: data.id })
+
+      if (result.error) {
+        setCheckoutError(result.error.message)
+        setLoading(false)
+      }
+    } catch (error) {
+      setCheckoutError('Failed to create checkout session')
+      setLoading(false)
+    }
   }
 
   if (!cart || cart.items.length === 0) {
@@ -66,7 +102,10 @@ const CartPage = () => {
 
       <div className={styles.CartSummary}>
         <p>Subtotal: USD {cart.total.toFixed(2)}</p>
-        <button className={`${btnStyles.Button} ${btnStyles.Darker}`}>Checkout</button>
+        <button className={`${btnStyles.Button} ${btnStyles.Darker}`} onClick={handleCheckout}>
+          Checkout
+        </button>
+        {checkoutError && <Alert variant="danger">{checkoutError}</Alert>}
       </div>
 
       {alertMessage && (
@@ -74,6 +113,8 @@ const CartPage = () => {
           {alertMessage.message}
         </Alert>
       )}
+
+      {loading && <LoadingSpinner message="Processing Checkout..." />}
     </div>
   )
 }
