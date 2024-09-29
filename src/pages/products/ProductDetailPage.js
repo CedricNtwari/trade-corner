@@ -37,7 +37,9 @@ const ProductDetailPage = () => {
   }, [id])
 
   const handleAddToCart = () => {
-    addToCart(product.id, product.stock)
+    if (product.stock > 0) {
+      addToCart(product.id, product.stock)
+    }
   }
 
   const handleProductClick = (productId) => {
@@ -73,14 +75,24 @@ const ProductDetailPage = () => {
               </div>
               <p>{product.description}</p>
               <p>Seller: {product.owner}</p>
-              <p>In stock: {product.stock}</p>
+              {product.stock > 0 ? (
+                <p>In stock: {product.stock}</p>
+              ) : (
+                <p className={styles.OutOfStock}>Out of Stock</p>
+              )}
               <div>
                 <button
-                  className={`btn ${btnStyles.Button} ${btnStyles.Bright}`}
+                  className={`btn ${btnStyles.Button} ${
+                    product.stock > 0 ? btnStyles.Bright : btnStyles.Disabled
+                  }`}
                   onClick={handleAddToCart}
-                  disabled={disableAddToCart}
+                  disabled={disableAddToCart || product.stock <= 0}
                 >
-                  {disableAddToCart ? 'Max stock in cart' : 'Add to Cart'}
+                  {disableAddToCart
+                    ? 'Max stock in cart'
+                    : product.stock > 0
+                    ? 'Add to Cart'
+                    : 'Out of Stock'}
                 </button>
               </div>
               {alertMessage && (

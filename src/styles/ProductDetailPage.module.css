@@ -1,88 +1,87 @@
 .ProductDetailPage {
   padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .ProductWrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .ImageContainer {
-  flex: 1;
-  max-width: 600px;
+  max-width: 100%;
+  margin-bottom: 20px;
 }
 
 .ProductImage {
   width: 100%;
-  height: auto;
   object-fit: cover;
-  border-radius: 8px;
 }
 
-.ProductDetails {
-  flex: 1;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 10px;
+/* Flexbox Layout for Larger Screens */
+@media (min-width: 768px) {
+  .ProductWrapper {
+    flex-direction: row; /* Display image and details side by side */
+  }
+
+  .ImageContainer {
+    max-width: 50%; /* Set image to take 50% of the width */
+    margin-right: 20px;
+  }
+
+  .ProductDetails {
+    max-width: 50%; /* Set product details to take 50% of the width */
+    margin-left: 20px;
+  }
+
+  .PriceSection {
+    font-size: 1.5rem; /* Increase font size for larger screens */
+  }
+
+  .CurrentPrice {
+    font-size: 2rem; /* Highlight price on larger screens */
+    font-weight: bold;
+    color: #c9378b;
+  }
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.PriceSection {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.CurrentPrice {
-  color: #c9378b;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.OriginalPrice {
-  text-decoration: line-through;
-  color: #999;
-  font-size: 1.2rem;
-}
-
+/* Related Products Layout */
 .RelatedProducts {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 .RelatedGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
+@media (min-width: 768px) {
+  .RelatedGrid {
+    grid-template-columns: repeat(4, 1fr); /* Display 4 products in a row on large screens */
+  }
+}
+
 .RelatedItem {
-  text-align: center;
-  transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
-  border: 0.5px solid lightgray;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Add transition for smooth hover effect */
 }
 
 .RelatedItem:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* Slight upward movement on hover */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Shadow effect on hover */
 }
 
 .RelatedItem img {
   width: 100%;
-  height: auto;
+  height: 150px;
   object-fit: cover;
 }
 
-.RelatedItem p {
-  margin: 5px 0;
+/* Stock Indicator */
+.OutOfStock {
+  font-size: 18px;
+  color: red;
 }
