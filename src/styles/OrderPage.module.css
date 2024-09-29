@@ -1,0 +1,50 @@
+.OrderHistoryPage {
+  padding: 20px;
+}
+
+.OrderCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  flex-wrap: wrap;
+}
+
+.OrderImage {
+  width: 80px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.OrderDetails {
+  flex: 1;
+  margin-left: 15px;
+}
+
+.OrderDetails h3 {
+  margin-bottom: 10px;
+}
+
+.OrderDetails button {
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .OrderCard {
+    flex-wrap: nowrap;
+  }
+
+  .OrderImage {
+    width: 100px;
+  }
+
+  .OrderDetails {
+    margin-left: 20px;
+  }
+}

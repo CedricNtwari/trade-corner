@@ -6,6 +6,7 @@ import PersonalDetails from './PersonalDetails'
 import UserProducts from './UserProducts'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import styles from '../../styles/ProfilePage.module.css'
+import OrderHistorySection from '../../pages/orders/OrderHistorySection'
 
 const ProfilePage = () => {
   const { id } = useParams()
@@ -41,6 +42,9 @@ const ProfilePage = () => {
       <ProfileHeader profile={profile} />
       <PersonalDetails profile={profile} setProfile={setProfile} />
       <UserProducts products={profile.products} />
+
+      {/* Adding the new Order History Section */}
+      <OrderHistorySection userId={id} />
     </div>
   )
 }
