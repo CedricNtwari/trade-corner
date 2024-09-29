@@ -16,6 +16,8 @@ import AddProduct from './pages/products/AddProductForm'
 import EditProductPage from './pages/products/EditProductPage'
 import ProductDetailsPage from './pages/products/ProductDetailPage'
 import CartPage from './pages/cart/CartPage'
+import PaymentSuccess from './pages/checkout/PaymentSuccess'
+import PaymentFailure from './pages/checkout/PaymentFailure'
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/cart" component={CartPage} />
+          <Route path="/payment-success" component={PaymentSuccess} />
+          <Route path="/payment-failure" component={PaymentFailure} />
           <Route exact path="/products" component={ProductsPage} />
           <Route path="/profiles/:id" component={ProfilePage} />
           <Route exact path="/faq" component={FAQ} />
