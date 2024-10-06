@@ -10,16 +10,29 @@ const ProductsPage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [hasMore, setHasMore] = useState(false)
 
+  const productsPerPage = 6
   const history = useHistory()
 
-  const fetchProducts = async (category) => {
+  const fetchProducts = async (category, page = 1) => {
     setLoading(true)
     setError(null)
     try {
-      const endpoint = category === 'all' ? '/products/' : `/products/?category=${category}`
+      const endpoint =
+        category === 'all'
+          ? `/products/?page=${page}&page_size=${productsPerPage}`
+          : `/products/?category=${category}&page=${page}&page_size=${productsPerPage}`
       const response = await axiosRes.get(endpoint)
-      setProducts(response.data.results)
+
+      if (page === 1) {
+        setProducts(response.data.results)
+      } else {
+        setProducts((prevProducts) => [...prevProducts, ...response.data.results])
+      }
+
+      setHasMore(response.data.next !== null)
     } catch (err) {
       setError('Failed to load products')
     } finally {
@@ -28,19 +41,25 @@ const ProductsPage = () => {
   }
 
   useEffect(() => {
+    setCurrentPage(1)
     fetchProducts(selectedCategory)
   }, [selectedCategory])
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category)
-    fetchProducts(category)
   }
 
   const handleProductClick = (productId) => {
     history.push(`/products/${productId}`)
   }
 
-  if (loading) {
+  const loadMoreProducts = () => {
+    const nextPage = currentPage + 1
+    setCurrentPage(nextPage)
+    fetchProducts(selectedCategory, nextPage)
+  }
+
+  if (loading && currentPage === 1) {
     return <LoadingSpinner message="Loading products..." />
   }
 
@@ -88,16 +107,29 @@ const ProductsPage = () => {
               onClick={() => handleProductClick(product.id)}
             >
               <img src={product.image} alt={product.name} className={styles.ProductImage} />
-              <h2>{product.name}</h2>
-              <p>{product.description}</p>
-              <p>${product.price}</p>
-              <p>In stock: {product.stock}</p>
+              <h2 className={styles.ProductName}>{product.name}</h2>
+              <div className={styles.ProductCategory}>{product.category.toUpperCase()}</div>
+              <p className={styles.ProductDescription}>{product.description}</p>
+              <div className={styles.ProductPrice}>${product.price}</div>
+              <div className={styles.ProductStock}>In stock: {product.stock}</div>
             </div>
           ))
         ) : (
           <p>No products found in this category.</p>
         )}
       </div>
+
+      {hasMore && (
+        <div className={styles.LoadMoreSection}>
+          <button
+            className={`${btnStyles.Button} ${btnStyles.Bright}`}
+            onClick={loadMoreProducts}
+            disabled={loading}
+          >
+            {loading ? 'Loading...' : 'Load More'}
+          </button>
+        </div>
+      )}
     </div>
   )
 }

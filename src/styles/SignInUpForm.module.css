@@ -79,6 +79,11 @@
   padding-bottom: 20px;
 }
 
+.Address {
+  font-size: larger;
+  color: #c9378b;
+}
+
 .Link {
   text-decoration: none;
   text-align: center;
@@ -132,6 +137,10 @@ p {
   font-size: 1.2rem;
   margin-bottom: 20px;
   color: #555;
+}
+
+.ErrorMessage {
+  color: red;
 }
 
 @media (min-width: 768px) {
