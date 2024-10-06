@@ -97,6 +97,13 @@ button:disabled {
   gap: 20px;
 }
 
+.ProductCategory {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #a67c52;
+  margin-bottom: 8px;
+}
+
 @media (min-width: 768px) {
   .RelatedGrid {
     grid-template-columns: repeat(4, 1fr);

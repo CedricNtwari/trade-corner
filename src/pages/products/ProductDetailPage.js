@@ -80,6 +80,7 @@ const ProductDetailPage = () => {
                   USD {product.price ? parseFloat(product.price).toFixed(2) : '0.00'}
                 </span>
               </div>
+              <div className={styles.ProductCategory}>{product.category.toUpperCase()}</div>
               <p>{product.description}</p>
               <p>Seller: {product.owner}</p>
               {product.stock > 0 ? (
@@ -87,6 +88,22 @@ const ProductDetailPage = () => {
               ) : (
                 <p className={styles.OutOfStock}>Out of Stock</p>
               )}
+
+              <div className={styles.LocationWrapper}>
+                <i className="fas fa-map-marker-alt"></i>
+                <span className={styles.LocationDetails}>
+                  {product.street_address}, {product.city}, {product.state} {product.postal_code},{' '}
+                  {product.country}
+                </span>
+              </div>
+
+              <div className={styles.ShippingInfo}>
+                <i className="fas fa-truck"></i>
+                <span className={styles.ShippingText}>
+                  Once payment is received, the product will be shipped from this address and
+                  delivered within 2-3 business days.
+                </span>
+              </div>
               <div>
                 <button
                   className={`btn ${btnStyles.Button} ${
