@@ -96,7 +96,7 @@ const NavBar = () => {
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
-      <NavLink className={styles.NavLink} to="/orders" onClick={() => setMenuOpen(false)}>
+      <NavLink className={styles.NavLink} to="/order" onClick={() => setMenuOpen(false)}>
         <i className="fas fa-receipt"></i> Orders
       </NavLink>
       <NavLink
@@ -136,7 +136,7 @@ const NavBar = () => {
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
-      <NavLink className={styles.NavLink} to="/orders" onClick={closeMenu}>
+      <NavLink className={styles.NavLink} to="/order-history" onClick={closeMenu}>
         <i className="fas fa-receipt"></i> Orders
       </NavLink>
       <NavLink

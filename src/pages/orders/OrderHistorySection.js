@@ -14,7 +14,6 @@ const OrderHistorySection = ({ userId }) => {
       setLoading(true)
       try {
         const response = await axios.get('/order-history/')
-        // Extract the 'results' array from the API response
         setOrders(response.data.results)
       } catch (err) {
         setError('Failed to load order history.')
