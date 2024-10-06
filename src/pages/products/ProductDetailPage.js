@@ -6,6 +6,7 @@ import btnStyles from '../../styles/Button.module.css'
 import { useCart, useSetCart } from '../../contexts/CartContext'
 import { Alert } from 'react-bootstrap'
 import LoadingSpinner from '../../components/LoadingSpinner'
+import { useCurrentUser } from '../../contexts/CurrentUserContext'
 
 const ProductDetailPage = () => {
   const { id } = useParams()
@@ -16,6 +17,7 @@ const ProductDetailPage = () => {
   const [error, setError] = useState(null)
   const { addToCart, alertMessage } = useSetCart()
   const { cart } = useCart()
+  const currentUser = useCurrentUser()
 
   const existingCartItem = cart?.items.find((item) => item.product.id === product?.id)
   const disableAddToCart = existingCartItem && existingCartItem.quantity >= product?.stock
@@ -37,6 +39,11 @@ const ProductDetailPage = () => {
   }, [id])
 
   const handleAddToCart = () => {
+    if (!currentUser) {
+      alert('Please log in to add products to your cart.')
+      history.push('/signin')
+      return
+    }
     if (product.stock > 0) {
       addToCart(product.id, product.stock)
     }
