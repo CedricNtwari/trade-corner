@@ -23,7 +23,7 @@ function ContactUs() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      await axios.post('/contact-us/', contactData) // Removed the 'data' variable
+      await axios.post('/contact-us/', contactData)
       setSuccessMessage('Your message has been sent successfully!')
       setContactData({
         name: '',
