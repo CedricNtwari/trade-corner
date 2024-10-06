@@ -1,11 +1,13 @@
 .ProductDetailPage {
   padding: 20px;
+  font-family: "Arial", sans-serif;
 }
 
 .ProductWrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .ImageContainer {
@@ -16,38 +18,77 @@
 .ProductImage {
   width: 100%;
   object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Flexbox Layout for Larger Screens */
+.ProductDetails {
+  text-align: center;
+  padding: 10px;
+}
+
+.ProductDetails h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.ProductDetails p {
+  font-size: 1rem;
+  margin: 8px 0;
+  color: #555;
+}
+
+.ProductDetails .PriceSection {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #c9378b;
+  margin-bottom: 10px;
+}
+
+.ProductDetails .CurrentPrice {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #d93884;
+  margin-bottom: 10px;
+}
+
+.ProductDetails .OutOfStock {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.ProductDetails button {
+  margin-top: 15px;
+}
+
+button:disabled {
+  background-color: #ccc !important;
+}
+
 @media (min-width: 768px) {
   .ProductWrapper {
-    flex-direction: row; /* Display image and details side by side */
+    flex-direction: row;
+    align-items: flex-start;
   }
 
   .ImageContainer {
-    max-width: 50%; /* Set image to take 50% of the width */
+    max-width: 45%;
     margin-right: 20px;
   }
 
   .ProductDetails {
-    max-width: 50%; /* Set product details to take 50% of the width */
-    margin-left: 20px;
-  }
-
-  .PriceSection {
-    font-size: 1.5rem; /* Increase font size for larger screens */
-  }
-
-  .CurrentPrice {
-    font-size: 2rem; /* Highlight price on larger screens */
-    font-weight: bold;
-    color: #c9378b;
+    max-width: 50%;
+    text-align: left;
   }
 }
 
 /* Related Products Layout */
 .RelatedProducts {
   margin-top: 40px;
+  text-align: center;
 }
 
 .RelatedGrid {
@@ -58,7 +99,7 @@
 
 @media (min-width: 768px) {
   .RelatedGrid {
-    grid-template-columns: repeat(4, 1fr); /* Display 4 products in a row on large screens */
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -66,22 +107,16 @@
   cursor: pointer;
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease; /* Add transition for smooth hover effect */
+    box-shadow 0.3s ease;
 }
 
 .RelatedItem:hover {
-  transform: translateY(-5px); /* Slight upward movement on hover */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Shadow effect on hover */
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .RelatedItem img {
   width: 100%;
   height: 150px;
   object-fit: cover;
-}
-
-/* Stock Indicator */
-.OutOfStock {
-  font-size: 18px;
-  color: red;
 }
