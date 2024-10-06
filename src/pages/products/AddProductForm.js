@@ -29,7 +29,19 @@ const AddProductForm = () => {
 
   const [successMessage, setSuccessMessage] = useState('')
   const [errors, setErrors] = useState({})
+  const [generalError, setGeneralError] = useState('')
   const history = useHistory()
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0 || successMessage || generalError) {
+      const timer = setTimeout(() => {
+        setErrors({})
+        setSuccessMessage('')
+        setGeneralError('')
+      }, 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [errors, successMessage, generalError])
 
   const validateForm = () => {
     let formErrors = {}
@@ -122,7 +134,21 @@ const AddProductForm = () => {
         history.push('/products')
       }, 3000)
     } catch (err) {
-      setErrors(err.response?.data || {})
+      if (err.response) {
+        if (err.response.status === 503) {
+          setGeneralError('Service Unavailable. Please try again later.')
+        } else if (err.response.status === 500) {
+          setGeneralError('Internal Server Error. Please contact support.')
+        } else if (err.response.status === 404) {
+          setGeneralError('Requested resource not found.')
+        } else if (err.response.status === 403) {
+          setGeneralError('You do not have permission to perform this action.')
+        } else {
+          setErrors(err.response.data || {})
+        }
+      } else {
+        setGeneralError('Network error. Please check your internet connection.')
+      }
     }
   }
 
@@ -143,6 +169,7 @@ const AddProductForm = () => {
   return (
     <Container className="mt-5">
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
+      {generalError && <Alert variant="danger">{generalError}</Alert>}
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <h2 className={styles.Header}>{id ? 'Edit Product' : 'Add a Product'}</h2>
@@ -283,74 +310,13 @@ const AddProductForm = () => {
               </Col>
             </Row>
 
-            <h3 className={styles.Header}>Address Information</h3>
+            <h4 className={styles.Address}>
+              Address Information:{' '}
+              <p className={styles.ProfileAddressInfo}>
+                The product's shipping address will be the one in your profile.
+              </p>
+            </h4>
 
-            <Row>
-              <Col md={6}>
-                <Form.Group controlId="street_address">
-                  <Form.Label>Street Address</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter street address"
-                    name="street_address"
-                    value={productData.street_address}
-                    onChange={handleChange}
-                    className={styles.Input}
-                    required
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group controlId="city">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter city"
-                    name="city"
-                    value={productData.city}
-                    onChange={handleChange}
-                    className={styles.Input}
-                    required
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col md={6}>
-                <Form.Group controlId="state">
-                  <Form.Label>State</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter state"
-                    name="state"
-                    value={productData.state}
-                    onChange={handleChange}
-                    className={styles.Input}
-                    required
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group controlId="postal_code">
-                  <Form.Label>Postal Code</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter postal code"
-                    name="postal_code"
-                    value={productData.postal_code}
-                    onChange={handleChange}
-                    className={styles.Input}
-                    required
-                  />
-                  {errors.postal_code?.map((message, idx) => (
-                    <div key={idx} className={styles.ErrorMessage}>
-                      {message}
-                    </div>
-                  ))}
-                </Form.Group>
-              </Col>
-            </Row>
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright} mb-5`}
               type="submit"
