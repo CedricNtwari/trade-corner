@@ -17,6 +17,36 @@ const Footer = () => {
 
   const closeModal = () => setShowModal(false)
 
+  const getModalBody = () => {
+    switch (modalContent) {
+      case 'Returns':
+        return (
+          <p>
+            The clothes can be returned within 30 days of receipt, as long as we receive the item in
+            the same condition in which it was shipped...
+          </p>
+        )
+      case 'Shipping':
+        return (
+          <p>All articles are sent by A-Post. You will receive the product within 1-3 days...</p>
+        )
+      case 'Imprint':
+        return (
+          <p>
+            Trade Corner
+            <br />
+            Seestrasse 80
+            <br />
+            8806 SZ, Switzerland
+            <br />
+            E-Mail: ntwaricedric@gmail.com
+          </p>
+        )
+      default:
+        return null
+    }
+  }
+
   return (
     <footer className={styles.footer}>
       <Container className={styles.wrapper}>
@@ -96,32 +126,13 @@ const Footer = () => {
           <Modal.Header closeButton className={modalStyles.Header}>
             <Modal.Title>{modalContent}</Modal.Title>
           </Modal.Header>
-          <Modal.Body className={modalStyles.Paragraph}>
-            {modalContent === 'Returns' && (
-              <p>
-                The clothes can be returned within 30 days of receipt, as long as we receive the
-                item in the same condition in which it was shipped...
-              </p>
-            )}
-            {modalContent === 'Shipping' && (
-              <p>
-                All articles are sent by A-Post. You will receive the product within 1-3 days...
-              </p>
-            )}
-            {modalContent === 'Imprint' && (
-              <p>
-                Trade Corner
-                <br />
-                Seestrasse 80
-                <br />
-                8806 SZ, Switzerland
-                <br />
-                E-Mail: ntwaricedric@gmail.com
-              </p>
-            )}
-          </Modal.Body>
+          <Modal.Body className={modalStyles.Paragraph}>{getModalBody()}</Modal.Body>
           <Modal.Footer>
-            <Button className={`${btnStyles.Button} ${btnStyles.Bright}`} onClick={closeModal}>
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Bright}`}
+              onClick={closeModal}
+              data-testid={`modal-close-button-${modalContent}`}
+            >
               Close
             </Button>
           </Modal.Footer>
