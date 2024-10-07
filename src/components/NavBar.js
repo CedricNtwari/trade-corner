@@ -90,6 +90,7 @@ const NavBar = () => {
   const loggedInIcons = (
     <>
       <NavLink
+        data-testid="desktop-profile"
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
         onClick={() => setMenuOpen(false)}
@@ -106,6 +107,7 @@ const NavBar = () => {
           handleSignOut()
           setMenuOpen(false)
         }}
+        data-testid="desktop-signout"
       >
         <i className="fas fa-sign-out-alt"></i> Sign out
       </NavLink>
@@ -130,6 +132,7 @@ const NavBar = () => {
         <i className="fas fa-plus-circle"></i>Add Product
       </NavLink>
       <NavLink
+        data-testid="mobile-profile"
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
         onClick={closeMenu}
@@ -140,6 +143,7 @@ const NavBar = () => {
         <i className="fas fa-receipt"></i> Orders
       </NavLink>
       <NavLink
+        data-testid="mobile-signout"
         className={styles.NavLink}
         to="/"
         onClick={() => {
@@ -154,7 +158,12 @@ const NavBar = () => {
 
   const loggedOutIcons = (
     <>
-      <NavLink to="/signin" activeClassName={styles.Active} onClick={() => setMenuOpen(false)}>
+      <NavLink
+        data-testid="desktop-signin"
+        to="/signin"
+        activeClassName={styles.Active}
+        onClick={() => setMenuOpen(false)}
+      >
         <i className="fas fa-sign-in-alt"></i>
         <span className={styles.navLinkText}>Sign in</span>
       </NavLink>
@@ -167,7 +176,12 @@ const NavBar = () => {
 
   const loggedOutIconsMobile = (
     <>
-      <NavLink to="/signin" activeClassName={styles.Active} onClick={closeMenu}>
+      <NavLink
+        data-testid="mobile-signin"
+        to="/signin"
+        activeClassName={styles.Active}
+        onClick={closeMenu}
+      >
         <i className="fas fa-sign-in-alt"></i>
         <span className={styles.navLinkText}>Sign in</span>
       </NavLink>
