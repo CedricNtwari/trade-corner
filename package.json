@@ -48,10 +48,11 @@
     "@babel/preset-react": "^7.25.7",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
+    "jest": "^26.6.0",
     "msw": "^0.35.0"
   },
   "engines": {
-    "node": "16.19.1",
-    "npm": "8.19.3"
+    "node": ">=18",
+    "npm": ">=8"
   }
 }
