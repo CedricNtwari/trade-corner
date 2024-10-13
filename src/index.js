@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client' // Import createRoot from React 18
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
@@ -7,17 +7,21 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { CartProvider } from './contexts/CartContext'
 import { CurrentUserprovider } from './contexts/CurrentUserContext'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <CurrentUserprovider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </CurrentUserprovider>
-    </Router>
-  </React.StrictMode>,
-  document.getElementById('root'),
+// Get the root element from the DOM
+const container = document.getElementById('root')
+
+// Use createRoot to render the application
+const root = createRoot(container)
+
+// Render the app with the updated createRoot API
+root.render(
+  <Router>
+    <CurrentUserprovider>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </CurrentUserprovider>
+  </Router>,
 )
 
 // If you want to start measuring performance in your app, pass a function
