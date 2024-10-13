@@ -135,4 +135,24 @@ export const handlers = [
       }),
     )
   }),
+
+  // Mock profile API request
+  rest.get(`${baseURL}profiles/:id/`, (req, res, ctx) => {
+    const { id } = req.params
+    if (id === '4') {
+      return res(
+        ctx.json({
+          id: 4,
+          username: 'cedri',
+          products: [],
+        }),
+      )
+    }
+    return res(
+      ctx.status(404),
+      ctx.json({
+        message: 'Profile not found',
+      }),
+    )
+  }),
 ]

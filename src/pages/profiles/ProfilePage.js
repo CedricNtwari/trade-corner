@@ -18,8 +18,10 @@ const ProfilePage = () => {
     const fetchProfile = async () => {
       try {
         const { data } = await axios.get(`/profiles/${id}/`)
+        console.log('Fetched profile data:', data)
         setProfile(data)
       } catch (err) {
+        console.log('Error fetching profile:', err)
         setError('Profile not found')
       } finally {
         setLoading(false)
