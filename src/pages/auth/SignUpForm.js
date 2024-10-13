@@ -83,6 +83,7 @@ const SignUpForm = () => {
                 required
                 placeholder=" "
                 onChange={handleChange}
+                data-testid="username-input"
               />
               <Form.Label>
                 Username<span className={styles.Span}> *</span>
@@ -103,6 +104,7 @@ const SignUpForm = () => {
                 required
                 placeholder=" "
                 onChange={handleChange}
+                data-testid="password1-input"
               />
               <Form.Label>
                 Password<span className={styles.Span}> *</span>
@@ -123,6 +125,7 @@ const SignUpForm = () => {
                 required
                 placeholder=" "
                 onChange={handleChange}
+                data-testid="password2-input"
               />
               <Form.Label>
                 Confirm password<span className={styles.Span}> *</span>
