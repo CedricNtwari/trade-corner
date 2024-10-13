@@ -1,10 +1,9 @@
-// src/mocks/handlers.js
 import { rest } from 'msw'
 
 const baseURL = 'https://ecommerce-backend-api-1-abe8f24df824.herokuapp.com/'
 
 export const handlers = [
-  // Mocking user GET request
+  // User-related endpoints
   rest.get(`${baseURL}dj-rest-auth/user/`, (req, res, ctx) => {
     return res(
       ctx.json({
@@ -20,12 +19,10 @@ export const handlers = [
     )
   }),
 
-  // Mocking logout POST request
   rest.post(`${baseURL}dj-rest-auth/logout/`, (req, res, ctx) => {
     return res(ctx.status(200))
   }),
 
-  // Mocking successful login POST request
   rest.post(`${baseURL}dj-rest-auth/login/`, (req, res, ctx) => {
     const { username, password } = req.body
 
@@ -50,7 +47,7 @@ export const handlers = [
     )
   }),
 
-  // Product handlers
+  // Product-related endpoints
   rest.get(`${baseURL}products/:id/`, (req, res, ctx) => {
     return res(
       ctx.json({
@@ -77,7 +74,6 @@ export const handlers = [
     return res(ctx.status(200))
   }),
 
-  // Validation errors for products
   rest.post(`${baseURL}products/`, (req, res, ctx) => {
     return res(
       ctx.status(400),
@@ -85,6 +81,57 @@ export const handlers = [
         name: ['Product name should contain only letters and spaces.'],
         description: ['Description should be at least 10 characters long.'],
         price: ['Price should be a positive number.'],
+      }),
+    )
+  }),
+
+  // Cart-related endpoints
+  rest.get(`${baseURL}cart/`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        items: [
+          {
+            id: 1,
+            product: {
+              id: 1,
+              name: 'Test Product',
+              price: '10.00',
+              image: 'https://example.com/test-product.jpg',
+            },
+            quantity: 2,
+          },
+        ],
+        total_price: '20.00',
+      }),
+    )
+  }),
+
+  rest.post(`${baseURL}cart/add/`, (req, res, ctx) => {
+    const { productId, quantity } = req.body
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: `Added ${quantity} units of product ${productId} to the cart.`,
+      }),
+    )
+  }),
+
+  rest.put(`${baseURL}cart/update/`, (req, res, ctx) => {
+    const { productId, quantity } = req.body
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: `Updated product ${productId} quantity to ${quantity} in the cart.`,
+      }),
+    )
+  }),
+
+  rest.delete(`${baseURL}cart/remove/:id/`, (req, res, ctx) => {
+    const { id } = req.params
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: `Removed product ${id} from the cart.`,
       }),
     )
   }),
