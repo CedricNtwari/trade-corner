@@ -155,4 +155,42 @@ export const handlers = [
       }),
     )
   }),
+
+  // Order-related endpoints
+  rest.get(`${baseURL}order-history/`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        results: [
+          {
+            id: 1,
+            total_price: '100.00',
+            status: 'Delivered',
+            order_date: '2024-10-01',
+            items: [
+              {
+                id: 1,
+                name: 'Test Product',
+                price: '50.00',
+                quantity: 2,
+              },
+            ],
+          },
+        ],
+      }),
+    )
+  }),
+
+  rest.get(`${baseURL}order-history/`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        results: [
+          {
+            id: 1,
+            product: 'Test Product',
+            price: '100.00',
+          },
+        ],
+      }),
+    )
+  }),
 ]
