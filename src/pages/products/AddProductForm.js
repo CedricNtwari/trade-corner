@@ -172,7 +172,7 @@ const AddProductForm = () => {
           })
           //console.log('data 1', data)
         } catch (err) {
-          console.error('Failed to load product', err)
+          //console.error('Failed to load product', err)
         }
       }
       fetchProduct()

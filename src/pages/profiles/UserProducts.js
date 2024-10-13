@@ -18,7 +18,7 @@ const UserProducts = ({ products }) => {
         await axios.delete(`/products/${productId}/`)
         window.location.reload()
       } catch (err) {
-        console.error('Error deleting product:', err)
+        //console.error('Error deleting product:', err)
       }
     }
   }

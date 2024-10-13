@@ -32,7 +32,7 @@ export const CartProvider = ({ children }) => {
         setCartCount(0)
       }
     } catch (error) {
-      console.error('Error fetching cart:', error)
+      //console.error('Error fetching cart:', error)
     }
   }
 
@@ -65,7 +65,7 @@ export const CartProvider = ({ children }) => {
 
       showAlert('success', 'Item added to cart successfully!')
     } catch (error) {
-      console.error('Error adding to cart:', error)
+      //console.error('Error adding to cart:', error)
       showAlert('error', 'Failed to add item to cart.')
     }
   }
@@ -80,7 +80,7 @@ export const CartProvider = ({ children }) => {
 
       showAlert('success', 'Item removed from cart.')
     } catch (error) {
-      console.error('Error removing from cart:', error)
+      //console.error('Error removing from cart:', error)
       showAlert('error', 'Failed to remove item from cart.')
     }
   }
@@ -100,7 +100,7 @@ export const CartProvider = ({ children }) => {
 
       showAlert('success', 'Quantity updated.')
     } catch (error) {
-      console.error('Error updating quantity:', error)
+      //console.error('Error updating quantity:', error)
       showAlert('error', 'Failed to update quantity.')
     }
   }

@@ -31,7 +31,7 @@ const EditProductPage = () => {
         const { data } = await axios.get(`/products/${id}/`)
         setProductData(data)
       } catch (err) {
-        console.error('Error fetching product data:', err)
+        //console.error('Error fetching product data:', err)
       } finally {
         setLoading(false)
       }
@@ -82,7 +82,7 @@ const EditProductPage = () => {
         if (err.response?.data) {
           setErrors(err.response.data)
         } else {
-          console.error('Error updating product:', err)
+          //console.error('Error updating product:', err)
         }
       })
   }

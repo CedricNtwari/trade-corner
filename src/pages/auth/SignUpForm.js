@@ -38,15 +38,15 @@ const SignUpForm = () => {
       }, 3000)
     } catch (err) {
       if (err.response) {
-        console.error('Error response:', err.response.data)
+        //console.error('Error response:', err.response.data)
         setErrors(err.response.data)
       } else if (err.request) {
-        console.error('Error request:', err.request)
+        //console.error('Error request:', err.request)
         setErrors({
           non_field_errors: ['Network error. Please check your connection or try again later.'],
         })
       } else {
-        console.error('Error message:', err.message)
+        //console.error('Error message:', err.message)
         setErrors({ non_field_errors: ['An unexpected error occurred.'] })
       }
     }
