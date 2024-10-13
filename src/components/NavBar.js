@@ -70,7 +70,7 @@ const NavBar = () => {
       }, 2000)
       history.push('/')
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 
