@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation, useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
 import styles from '../../styles/Form.module.css'
 import btnStyles from '../../styles/Button.module.css'
+import { useCurrentUser } from '../../contexts/CurrentUserContext'
+import LoadingSpinner from '../../components/LoadingSpinner'
 
 const EditProductPage = () => {
   const { id } = useParams()
   const history = useHistory()
-  const location = useLocation()
+  const { currentUser } = useCurrentUser()
+
   const [productData, setProductData] = useState({
     name: '',
     description: '',
@@ -18,23 +21,26 @@ const EditProductPage = () => {
     image: null,
   })
 
+  const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState({})
   const [successMessage, setSuccessMessage] = useState('')
 
   useEffect(() => {
-    if (location.state?.product) {
-      setProductData(location.state.product)
-    } else {
-      axios
-        .get(`/products/${id}/`)
-        .then((response) => setProductData(response.data))
-        .catch((err) => console.error('Error fetching product data:', err))
+    const fetchProduct = async () => {
+      try {
+        const { data } = await axios.get(`/products/${id}/`)
+        setProductData(data)
+      } catch (err) {
+        console.error('Error fetching product data:', err)
+      } finally {
+        setLoading(false)
+      }
     }
-  }, [id, location.state])
+    fetchProduct()
+  }, [id])
 
   const handleChange = (e) => {
     const { name, value, files } = e.target
-
     if (name === 'image') {
       setProductData((prevData) => ({
         ...prevData,
@@ -46,13 +52,6 @@ const EditProductPage = () => {
         [name]: value,
       }))
     }
-  }
-
-  const handleImageChange = (e) => {
-    setProductData({
-      ...productData,
-      image: e.target.files[0],
-    })
   }
 
   const handleSubmit = (e) => {
@@ -75,9 +74,9 @@ const EditProductPage = () => {
     axios
       .put(`/products/${id}/`, formData)
       .then((response) => {
-        console.log('Product updated:', response.data)
+        //console.log('Product updated:', response.data)
         setSuccessMessage('Product updated successfully!')
-        setTimeout(() => history.push('/profile'), 2000)
+        setTimeout(() => history.push(`/profile/${currentUser?.id || ''}`), 2000)
       })
       .catch((err) => {
         if (err.response?.data) {
@@ -89,7 +88,15 @@ const EditProductPage = () => {
   }
 
   const handleCancel = () => {
-    history.push('/profile')
+    if (currentUser?.id) {
+      history.push(`/profile/${currentUser.id}`)
+    } else {
+      history.push('/products')
+    }
+  }
+
+  if (loading) {
+    return <LoadingSpinner message="Loading product data..." />
   }
 
   return (
@@ -203,7 +210,7 @@ const EditProductPage = () => {
           <input
             type="file"
             name="image"
-            onChange={handleImageChange}
+            onChange={handleChange}
             className="form-control"
             accept="image/*"
           />
