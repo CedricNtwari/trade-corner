@@ -4,6 +4,7 @@ import { axiosRes } from '../../api/axiosDefaults'
 import styles from '../../styles/ProductsPage.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import LoadingSpinner from '../../components/LoadingSpinner'
+import { useCurrentUser } from '../../contexts/CurrentUserContext'
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([])
@@ -15,6 +16,7 @@ const ProductsPage = () => {
 
   const productsPerPage = 6
   const history = useHistory()
+  const currentUser = useCurrentUser()
 
   const fetchProducts = async (category, page = 1) => {
     setLoading(true)
@@ -40,10 +42,14 @@ const ProductsPage = () => {
     }
   }
 
-  useEffect(() => {
-    setCurrentPage(1)
-    fetchProducts(selectedCategory)
-  }, [selectedCategory])
+  useEffect(
+    () => {
+      setCurrentPage(1)
+      fetchProducts(selectedCategory)
+    },
+    [selectedCategory],
+    currentUser,
+  )
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category)
