@@ -157,14 +157,27 @@ const AddProductForm = () => {
       const fetchProduct = async () => {
         try {
           const { data } = await axios.get(`/products/${id}/`)
-          setProductData(data)
+          setProductData({
+            name: data.name || '',
+            description: data.description || '',
+            price: data.price || '',
+            stock: data.stock || '',
+            category: data.category || '',
+            size: data.size || '',
+            street_address: data.street_address || '',
+            city: data.city || '',
+            state: data.state || '',
+            postal_code: data.postal_code || '',
+            image: data.image || '',
+          })
+          //console.log('data 1', data)
         } catch (err) {
           console.error('Failed to load product', err)
         }
       }
       fetchProduct()
     }
-  }, [id])
+  }, [id]) // Remove `productData` from dependency array
 
   return (
     <Container className="mt-5">
@@ -183,7 +196,7 @@ const AddProductForm = () => {
                     type="text"
                     placeholder="Enter product name"
                     name="name"
-                    value={productData.name}
+                    value={productData.name || ''}
                     onChange={handleChange}
                     className={styles.Input}
                     required
@@ -266,6 +279,11 @@ const AddProductForm = () => {
                     <option value="men">Men</option>
                     <option value="kids">Kids</option>
                   </Form.Control>
+                  {errors.category?.map((message, idx) => (
+                    <div key={idx} className={styles.ErrorMessage}>
+                      {message}
+                    </div>
+                  ))}
                 </Form.Group>
               </Col>
             </Row>
@@ -289,6 +307,11 @@ const AddProductForm = () => {
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                   </Form.Control>
+                  {errors.size?.map((message, idx) => (
+                    <div key={idx} className={styles.ErrorMessage}>
+                      {message}
+                    </div>
+                  ))}
                 </Form.Group>
               </Col>
               <Col md={6}>
