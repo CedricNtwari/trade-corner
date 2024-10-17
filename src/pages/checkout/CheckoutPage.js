@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
+import { useCart, useSetCart } from '../../contexts/CartContext'
 import styles from '../../styles/SignInUpForm.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import LoadingSpinner from '../../components/LoadingSpinner'
@@ -12,6 +13,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
 const CheckoutPage = () => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const { cart } = useCart()
 
   const handleCheckout = async () => {
     setLoading(true)
