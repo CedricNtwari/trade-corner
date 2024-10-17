@@ -21,6 +21,7 @@ import PaymentSuccess from './pages/checkout/PaymentSuccess'
 import PaymentFailure from './pages/checkout/PaymentFailure'
 import OrderPage from './pages/orders/OrderPage'
 import PageNotFound from './pages/pageNotFound/PageNotFound'
+import OrderDetailsPage from './pages/orders/OrderDetailsPage'
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/products" component={ProductsPage} />
           <Route path="/profiles/:id" component={ProfilePage} />
           <Route exact path="/order-history" component={OrderPage} />
+          <Route path="/order/:id" component={OrderDetailsPage} />
           <Route exact path="/faq" component={FAQ} />
           <Route exact path="/terms-and-conditions" component={TermsConditions} />
           <Route exact path="/privacy-policy" component={PrivacyPolicy} />

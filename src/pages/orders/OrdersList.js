@@ -1,10 +1,16 @@
 import React from 'react'
 import styles from '../../styles/OrderPage.module.css'
 import btnStyles from '../../styles/Button.module.css'
+import { useHistory } from 'react-router-dom'
 
 const OrdersList = ({ orders }) => {
+  const history = useHistory()
   if (orders.length === 0) {
     return <p>No orders found.</p>
+  }
+
+  const handleViewDetails = (orderId) => {
+    history.push(`/order/${orderId}`)
   }
 
   return (
@@ -12,16 +18,22 @@ const OrdersList = ({ orders }) => {
       {orders.map((order) => (
         <div key={order.id} className={styles.OrderCard}>
           <img
-            src={order.profile.products[0]?.image || 'default-image.jpg'}
-            alt={order.profile.products[0]?.name || 'Product'}
+            src={order.items[0]?.product?.image || 'default-image.jpg'}
+            alt={order.items[0]?.product?.name || 'Product'}
             className={styles.OrderImage}
           />
           <div className={styles.OrderDetails}>
-            <p>Order date: {new Date(order.created_at).toLocaleDateString()}</p>
-            <h3>{order.profile.products[0]?.name || 'Product Name'}</h3>
+            <p>Order Number: {order.order_number}</p>
+            <p>Order Date: {new Date(order.created_at).toLocaleDateString()}</p>
+            <h3>{order.items[0]?.product?.name || 'Product Name'}</h3>
             <p>Status: {order.status}</p>
             <p>Total: USD {parseFloat(order.total_price).toFixed(2)}</p>
-            <button className={`${btnStyles.Button} ${btnStyles.Darker}`}>View Details</button>
+            <button
+              className={`${btnStyles.Button} ${btnStyles.Darker}`}
+              onClick={() => handleViewDetails(order.id)}
+            >
+              View Details
+            </button>
           </div>
         </div>
       ))}
