@@ -16,7 +16,8 @@ const CheckoutPage = () => {
   const handleCheckout = async () => {
     setLoading(true)
     try {
-      const { data } = await axios.post('/create-checkout-session/', { cart_id: cart.id })
+      const { data } = await axios.post('/create-checkout-session/', { cart_id: cart?.id })
+      console.log(cart?.id)
       const stripe = await stripePromise
       const result = await stripe.redirectToCheckout({ sessionId: data.id })
       if (result.error) {
