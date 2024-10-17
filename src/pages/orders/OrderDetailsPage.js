@@ -60,12 +60,12 @@ const OrderDetailsPage = () => {
           {order.items.map((item) => (
             <li key={item.id} className={styles.OrderItem}>
               <img
-                src={item.product.image || 'default-image.jpg'}
-                alt={item.product.name}
+                src={item.product.image || '/path-to-default-image.jpg'}
+                alt={item.product.name || 'Product'}
                 className={styles.OrderItemImage}
               />
               <div className={styles.OrderItemDetails}>
-                <p>{item.product.name}</p>
+                <p>{item.product.name || 'Product Name'}</p>
                 <p>Quantity: {item.quantity}</p>
                 <p>Price: USD {parseFloat(item.price).toFixed(2)}</p>
               </div>

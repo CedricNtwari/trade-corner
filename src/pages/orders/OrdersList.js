@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 
 const OrdersList = ({ orders }) => {
   const history = useHistory()
+
   if (orders.length === 0) {
     return <p>No orders found.</p>
   }
@@ -18,7 +19,7 @@ const OrdersList = ({ orders }) => {
       {orders.map((order) => (
         <div key={order.id} className={styles.OrderCard}>
           <img
-            src={order.items[0]?.product?.image || 'default-image.jpg'}
+            src={order.items[0]?.product?.image || '/path-to-default-image.jpg'}
             alt={order.items[0]?.product?.name || 'Product'}
             className={styles.OrderImage}
           />
