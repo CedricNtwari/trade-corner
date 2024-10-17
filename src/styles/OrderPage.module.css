@@ -2,6 +2,10 @@
   padding: 20px;
 }
 
+.OrderDetailsPage {
+  padding: 20px;
+}
+
 .OrderCard {
   display: flex;
   align-items: center;
