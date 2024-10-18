@@ -17,7 +17,12 @@ const OrderPage = () => {
     const fetchOrders = async () => {
       setLoading(true)
       try {
-        const response = await axios.get('/order-history/')
+        const token = localStorage.getItem('accessToken')
+        const response = await axios.get('/order-history/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         setOrders(response.data.results)
       } catch (err) {
         setError('Failed to load your order history.')
