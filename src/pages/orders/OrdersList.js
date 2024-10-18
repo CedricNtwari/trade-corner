@@ -17,7 +17,9 @@ const OrdersList = ({ orders }) => {
   return (
     <>
       {orders.map((order) => {
-        const productName = order.items[0]?.product?.name
+        const productName =
+          order.items[0]?.product?.name ||
+          'https://res.cloudinary.com/dexabr21b/image/upload/v1721983846/default_product_cjfapy.png'
         const productImage = order.items[0]?.product?.image
 
         return (
