@@ -89,6 +89,15 @@ const ProductDetailPage = () => {
                 <p className={styles.OutOfStock}>Out of Stock</p>
               )}
 
+              {/* Display Rating and Reviews */}
+              <div className={styles.ReviewSection}>
+                <p>
+                  Average Rating: {product.average_rating} / 5
+                  <span className={styles.StarRating}> ★★★★☆ </span>
+                  based on {product.review_count} review(s)
+                </p>
+              </div>
+
               <div className={styles.LocationWrapper}>
                 <i className="fas fa-map-marker-alt"></i>
                 <span className={styles.LocationDetails}>
