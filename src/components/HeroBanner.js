@@ -15,7 +15,7 @@ const HeroBanner = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://res.cloudinary.com/dexabr21b/image/upload/v1727024087/StockCake-Volunteers_Sorting_Clothes_1727024080_g9rr1k.jpg"
+          src="https://res.cloudinary.com/dexabr21b/image/upload/q_auto,f_auto/v1727024087/StockCake-Volunteers_Sorting_Clothes_1727024080_g9rr1k.jpg"
           alt="First slide"
         />
         <Carousel.Caption className={styles.caption}>
@@ -33,8 +33,9 @@ const HeroBanner = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://res.cloudinary.com/dexabr21b/image/upload/v1727023981/StockCake-Colorful_hanging_clothes_1727023840_eusabp.jpg"
+          src="https://res.cloudinary.com/dexabr21b/image/upload/q_auto,f_auto/v1727023981/StockCake-Colorful_hanging_clothes_1727023840_eusabp.jpg"
           alt="Second slide"
+          loading="lazy"
         />
         <Carousel.Caption className={styles.caption}>
           <h3>Buy second-hand clothes now</h3>
@@ -51,8 +52,9 @@ const HeroBanner = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://res.cloudinary.com/dexabr21b/image/upload/v1727023975/StockCake-Colorful_Laundry_Day_1727023901_hqdnjs.jpg"
+          src="https://res.cloudinary.com/dexabr21b/image/upload/q_auto,f_auto/v1727023975/StockCake-Colorful_Laundry_Day_1727023901_hqdnjs.jpg"
           alt="Third slide"
+          loading="lazy"
         />
         <Carousel.Caption className={styles.caption}>
           <h3>Exclusive Discounts</h3>

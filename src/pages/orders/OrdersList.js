@@ -22,7 +22,6 @@ const OrdersList = ({ orders }) => {
 
         return (
           <div key={order.id} className={styles.OrderCard}>
-            <img src={productImage} alt={productName || 'Product'} className={styles.OrderImage} />
             <div className={styles.OrderDetails}>
               <p>Order Number: {order.order_number}</p>
               <p>Order Date: {new Date(order.created_at).toLocaleDateString()}</p>

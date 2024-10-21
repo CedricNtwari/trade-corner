@@ -258,6 +258,7 @@ const NavBar = () => {
                   <button
                     onClick={handleSearchToggle}
                     className={`${styles.searchLink} ${searchOpen ? styles.searchLinkActive : ''}`}
+                    aria-label="search"
                   >
                     <i className="fas fa-search"></i>
                   </button>

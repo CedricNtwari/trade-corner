@@ -2,6 +2,10 @@
   margin-bottom: 30px;
 }
 
+.carousel button {
+  display: none;
+}
+
 .caption {
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
