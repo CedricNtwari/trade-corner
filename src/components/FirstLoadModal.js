@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import btnStyles from '../styles/Button.module.css'
+import modalStyles from '../styles/Modal.module.css'
 
 const FirstLoadModal = () => {
   const [showModal, setShowModal] = useState(false)
 
-  // Check if this is the first load
   useEffect(() => {
     const firstLoad = localStorage.getItem('firstLoad')
     if (!firstLoad) {
       setShowModal(true)
       localStorage.setItem('firstLoad', true)
+
+      setTimeout(() => {
+        setShowModal(false)
+      }, 3000)
     }
   }, [])
 
@@ -19,20 +23,20 @@ const FirstLoadModal = () => {
   }
 
   return (
-    <Modal show={showModal} onHide={handleClose}>
-      <Modal.Header closeButton>
+    <Modal show={showModal} onHide={handleClose} dialogClassName={modalStyles.centeredModal}>
+      <Modal.Header>
         <Modal.Title>Special Offer!</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Free Shipping on Orders Above 100 CHF</h4>
+        <h4>Free Shipping on Orders Above 100 USD</h4>
         <p>
           Don't miss out on this exclusive offer. Shop now and get free shipping when you spend 100
-          CHF or more.
+          USD or more.
         </p>
       </Modal.Body>
       <Modal.Footer>
         <Button className={`${btnStyles.Button} ${btnStyles.Bright}`} onClick={handleClose}>
-          Start Shopping
+          Close
         </Button>
       </Modal.Footer>
     </Modal>

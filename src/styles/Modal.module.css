@@ -1,0 +1,12 @@
+.centeredModal .modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.centeredModal .modal-content {
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
