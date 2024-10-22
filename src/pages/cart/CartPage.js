@@ -1,5 +1,3 @@
-/* global process */
-
 import React, { useState, useEffect } from 'react'
 import { useCart, useSetCart } from '../../contexts/CartContext'
 import styles from '../../styles/CartPage.module.css'
