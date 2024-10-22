@@ -19,11 +19,7 @@ const SellSection = () => {
             Switzerland. Simply list your items yourself and profit. The unique online flea market
             in your hand.
           </p>
-          <a
-            href="/products"
-            className={styles.link}
-            aria-label="Learn more about selling your clothes on our platform"
-          >
+          <a href="/products" className={styles.link} aria-label="Find out more here!">
             Find out more here!
           </a>
         </div>

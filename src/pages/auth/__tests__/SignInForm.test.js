@@ -8,7 +8,11 @@ import { useSetCart } from '../../../contexts/CartContext.js'
 
 jest.mock('axios')
 jest.mock('../../../contexts/CurrentUserContext.js')
-jest.mock('../../../contexts/CartContext.js')
+jest.mock('../../../contexts/CartContext.js', () => ({
+  useSetCart: jest.fn(() => ({
+    fetchCart: jest.fn(),
+  })),
+}))
 
 describe('SignInForm', () => {
   const mockSetCurrentUser = jest.fn()
