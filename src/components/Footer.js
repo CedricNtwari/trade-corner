@@ -23,13 +23,11 @@ const Footer = () => {
         return (
           <p>
             The clothes can be returned within 30 days of receipt, as long as we receive the item in
-            the same condition in which it was shipped...
+            the same condition in which it was shipped.
           </p>
         )
       case 'Shipping':
-        return (
-          <p>All articles are sent by A-Post. You will receive the product within 1-3 days...</p>
-        )
+        return <p>All articles are sent by A-Post. You will receive the product within 1-3 days.</p>
       case 'Imprint':
         return (
           <p>
@@ -84,7 +82,7 @@ const Footer = () => {
                 </button>
               </li>
               <li>
-                <a href="/terms-and-conditions">Terms & Conditions</a>
+                <a href="/terms-and-conditions">Terms &amp; Conditions</a>
               </li>
               <li>
                 <a href="/privacy-policy">Privacy Policy</a>

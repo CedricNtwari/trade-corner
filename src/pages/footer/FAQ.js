@@ -33,8 +33,8 @@ const FAQ = () => {
 
       <h3 className={styles.SubHeader}>How do you size your items?</h3>
       <p className={styles.Paragraph}>
-        In the detailed description of the respective article we indicate the "Label size" and the
-        "Fit size".
+        In the detailed description of the respective article we indicate the &quot;Label size&quot;
+        and the &quot;Fit size&quot;.
         <br />
         Label size; is the size, which the manufacturer indicates
         <br />

@@ -18,7 +18,6 @@ const OrdersList = ({ orders }) => {
     <>
       {orders.map((order) => {
         const productName = order.items[0]?.product?.name
-        const productImage = order.items[0]?.product?.image
 
         return (
           <div key={order.id} className={styles.OrderCard}>

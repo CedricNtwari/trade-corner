@@ -4,7 +4,7 @@ import {
   useCurrentUser,
   useSetCurrentUser,
 } from '../contexts/CurrentUserContext'
-import { axiosRes, axiosReq } from '../api/axiosDefaults'
+import { axiosRes } from '../api/axiosDefaults'
 import React from 'react'
 
 jest.mock('../api/axiosDefaults')

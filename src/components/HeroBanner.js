@@ -58,7 +58,7 @@ const HeroBanner = () => {
         />
         <Carousel.Caption className={styles.caption}>
           <h3>Exclusive Discounts</h3>
-          <p>Don't miss out on our limited-time offers</p>
+          <p>Don&apos;t miss out on our limited-time offers</p>
           <button
             className={`${btnStyles.Button} ${btnStyles.Blue}`}
             onClick={handleRedirect}

@@ -13,7 +13,7 @@ const ProfileHeader = ({ profile }) => {
       <h1>{profile?.owner || 'Unknown User'}</h1>
       <p>{profile?.email || 'No email provided'}</p>
       <p>
-        You've been a member since{' '}
+        You&apos;ve been a member since{' '}
         {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : 'N/A'}
       </p>
     </div>

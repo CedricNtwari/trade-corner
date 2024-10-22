@@ -30,8 +30,8 @@ const FirstLoadModal = () => {
       <Modal.Body>
         <h4>Free Shipping on Orders Above 100 USD</h4>
         <p>
-          Don't miss out on this exclusive offer. Shop now and get free shipping when you spend 100
-          USD or more.
+          Don&apos;t miss out on this exclusive offer. Shop now and get free shipping when you spend
+          100 USD or more.
         </p>
       </Modal.Body>
       <Modal.Footer>

@@ -2,13 +2,11 @@ import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import CartPage from '../CartPage'
-import { axiosRes } from '../../../api/axiosDefaults'
 import { loadStripe } from '@stripe/stripe-js'
 
-// Mocking the Cart Context
 import { useCart, useSetCart } from '../../../contexts/CartContext'
 
-jest.mock('../../../api/axiosDefaults') // Ensure axiosRes is mocked
+jest.mock('../../../api/axiosDefaults')
 jest.mock('@stripe/stripe-js')
 jest.mock('../../../contexts/CartContext')
 

@@ -73,7 +73,7 @@ const EditProductPage = () => {
 
     axios
       .put(`/products/${id}/`, formData)
-      .then((response) => {
+      .then(() => {
         //console.log('Product updated:', response.data)
         setSuccessMessage('Product updated successfully!')
         setTimeout(() => history.push(`/profile/${currentUser?.id || ''}`), 2000)

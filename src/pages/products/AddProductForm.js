@@ -336,7 +336,7 @@ const AddProductForm = () => {
             <h4 className={styles.Address}>
               Address Information:{' '}
               <p className={styles.ProfileAddressInfo}>
-                The product's shipping address will be the one in your profile.
+                The product#39;s shipping address will be the one in your profile.
               </p>
             </h4>
 
