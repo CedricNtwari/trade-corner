@@ -289,6 +289,7 @@ const NavBar = () => {
                   <button
                     onClick={handleMenuToggle}
                     className={`${styles.menuLink} ${menuOpen ? styles.menuLinkActive : ''}`}
+                    data-testid="menu-button"
                   >
                     <span className={styles.navLinkText}>Menu </span>
                     <i className="fas fa-bars"></i>

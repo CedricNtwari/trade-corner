@@ -29,7 +29,7 @@ const OrderHistorySection = ({ userId }) => {
   if (error) return <p>{error}</p>
 
   return (
-    <div className={styles.OrderHistorySection}>
+    <div className={styles.OrderHistorySection} data-testid="order-history-section">
       <h2>Your Orders</h2>
       <OrdersList orders={orders} />
     </div>

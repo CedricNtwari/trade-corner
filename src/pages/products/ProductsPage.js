@@ -80,24 +80,28 @@ const ProductsPage = () => {
       <div className={styles.CategoryFilters}>
         <button
           className={`${btnStyles.Button} ${btnStyles.Bright}`}
+          data-testid="filter-all"
           onClick={() => handleCategoryChange('all')}
         >
           All
         </button>
         <button
           className={`${btnStyles.Button} ${btnStyles.Bright}`}
+          data-testid="filter-women"
           onClick={() => handleCategoryChange('women')}
         >
           Women
         </button>
         <button
           className={`${btnStyles.Button} ${btnStyles.Bright}`}
+          data-testid="filter-men"
           onClick={() => handleCategoryChange('men')}
         >
           Men
         </button>
         <button
           className={`${btnStyles.Button} ${btnStyles.Bright}`}
+          data-testid="filter-kids"
           onClick={() => handleCategoryChange('kids')}
         >
           Kids
@@ -110,6 +114,7 @@ const ProductsPage = () => {
             <div
               key={product.id}
               className={styles.ProductItem}
+              data-testid={`product-card-${product.id}`}
               onClick={() => handleProductClick(product.id)}
             >
               <img src={product.image} alt={product.name} className={styles.ProductImage} />

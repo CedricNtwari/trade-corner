@@ -74,14 +74,14 @@ const ProductDetailPage = () => {
               />
             </div>
             <div className={styles.ProductDetails}>
-              <h1>{product.name}</h1>
+              <h1 data-testid="product-name">{product.name}</h1>
               <div className={styles.PriceSection}>
                 <span className={styles.CurrentPrice}>
                   USD {product.price ? parseFloat(product.price).toFixed(2) : '0.00'}
                 </span>
               </div>
               <div className={styles.ProductCategory}>{product.category.toUpperCase()}</div>
-              <p>{product.description}</p>
+              <p data-testid="product-description">{product.description}</p>
               <p>Seller: {product.owner}</p>
               {product.stock > 0 ? (
                 <p>In stock: {product.stock}</p>
@@ -120,6 +120,7 @@ const ProductDetailPage = () => {
                   }`}
                   onClick={handleAddToCart}
                   disabled={disableAddToCart || product.stock <= 0}
+                  data-testid="add-to-cart"
                 >
                   {disableAddToCart
                     ? 'Max stock in cart'
