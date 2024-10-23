@@ -11,13 +11,19 @@
   - [Usage](#usage)
 - [Features](#features)
   - [Specific Pages](#specific-pages)
+- [Design Process](#design-process)
+  - [Color Palette](#color-palette)
+- [Testing Checkout with Stripe](#testing-checkout-with-stripe)
+  - [Steps to test checkout](#steps-to-test-checkout)
 - [Testing & Quality Assurance](#testing--quality-assurance)
   - [Automated Testing](#automated-testing)
   - [Manual Testing](#manual-testing)
   - [Validator Testing](#validator-testing)
+  - [E2E Testing with Cypress](#e2e-testing-with-cypress)
+- [Version Control](#version-control)
+- [User Stories and Agile Methodology](#user-stories-and-agile-methodology)
+  - [Sprints Breakdown](#sprints-breakdown)
 - [Deployment to Heroku](#deployment-to-heroku)
-- [Design Process](#design-process)
-  - [Color Palette](#color-palette)
 - [Credits](#credits)
 - [API Documentation](#api-documentation)
 - [Contributing](#contributing)
@@ -106,21 +112,21 @@ npm start
 
 ## Design Process
 
-The design of "Budget Explorer" is centered around providing a simple and intuitive user experience for individuals who are looking for budget-friendly travel destinations. The core design goals were:
+The design of "Trade Corner" aims to create a user-friendly marketplace where buying, selling, and browsing products are simple and engaging. The key design principles we followed were:
 
-**Simplicity**: The user interface is designed to be easy to navigate, with minimal distractions. The goal was to allow users to input information quickly and get the results they need without unnecessary complexity.
+**Simplicity**: The platform's interface is designed to be intuitive and easy to navigate, allowing users to browse products, add items to their cart, and complete purchases effortlessly.
 
-**Responsiveness**: Since users might access the platform from various devices, a responsive design was key. The layout adapts to different screen sizes, ensuring that the user experience remains consistent on desktop, tablet, and mobile devices.
+**Responsiveness**: The layout adapts seamlessly to different screen sizes, ensuring a smooth user experience on desktops, tablets, and mobile devices.
 
-**Visual Appeal**: The color scheme and typography were chosen to create a clean and professional look. The use of images, especially in the recommendations and map sections, was emphasized to make the experience more engaging.
+**Visual Appeal**: We used a clean, modern color palette and typography to create a professional look. Product images are central to the design, with a focus on clear visuals to aid purchasing decisions.
 
-**User Flow**: The main user journey, from entering budget information to viewing travel recommendations and saving favorites, was mapped out to ensure a logical and smooth progression.
+**User Flow**: We streamlined the buying and selling journey, ensuring users can easily browse, filter, and purchase products. The checkout process is designed to be quick and intuitive.
 
-**Mobile-First Approach**: By focusing on mobile usability first, the interface delivers a consistent experience across devices. The application was designed with mobile users in mind, ensuring a responsive design that adapts seamlessly from mobile phones to tablets and desktop screens.
+**Mobile-First Approach**: Prioritizing mobile usability, the design focuses on ensuring smooth navigation and accessibility on mobile devices while maintaining consistency across all screen sizes.
 
-**Wireframes**: During the early stages of development, wireframes were created for key pages, including the homepage, about page, contact page, sign-up, and login pages. These wireframes were designed for desktop, tablet, and mobile views to ensure responsiveness and usability.
+**Wireframes**: Wireframes were developed for key pages such as the homepage, product details, cart, checkout, and profile sections. These wireframes ensured responsiveness and usability across desktop, tablet, and mobile views.
 
-[View Budget Explorer Design on Figma](https://www.figma.com/design/Cls9FKbYKvtu1L3NwvJabS/Trade-Corner?node-id=0-1&node-type=canvas&t=0dNKUmA7eurFlgKF-0)
+[View Trade Corner Design on Figma](https://www.figma.com/design/Cls9FKbYKvtu1L3NwvJabS/Trade-Corner?node-id=0-1&node-type=canvas&t=0dNKUmA7eurFlgKF-0)
 
 ### Color Palette
 
@@ -130,6 +136,35 @@ The chosen color palette reflects the goal of creating a clean, professional, an
 - **Secondary Color:** #f6d1ee
 - **Background Color:** #ffffff
 - **Text Color:** #212529
+
+## Testing Checkout with Stripe
+
+To test the checkout process, you can use the following Stripe test card numbers. These test cards simulate different types of payment methods and will not result in actual charges.
+
+- Visa
+  Number: 4242 4242 4242 4242
+  CVC: Any 3 digits
+  Expiration Date: Any future date
+
+- Visa (Debit)
+  Number: 4000 0566 5566 5556
+  CVC: Any 3 digits
+  Expiration Date: Any future date
+
+- Mastercard
+  Number: 5555 5555 5555 4444
+  CVC: Any 3 digits
+  Expiration Date: Any future date
+
+### Steps to test checkout
+
+- Navigate to the checkout page of the application.
+- Use any of the test cards mentioned above when prompted for payment details.
+- Enter any valid expiration date in the future (e.g., 12/34).
+- Enter any valid CVC code as per the card type (3 or 4 digits).
+- Complete the checkout process. No actual charges will be made.
+
+For more details on testing with Stripe's test cards, visit their documentation(https://docs.stripe.com/testing).
 
 ## Testing & Quality Assurance
 
@@ -167,7 +202,7 @@ SEO: 100
 
 **Please note that the performance and best practices scores are slightly lower due to the integration of third-party services such as Cloudinary (for image hosting) and Stripe (for payment processing). These services rely on third-party cookies and external assets, which affect the scores. While these tools are necessary for providing essential features like optimized media delivery and secure payment processing, they limit the extent to which we can fully control performance and third-party cookie usage. Efforts are continuously being made to improve these metrics within the constraints of these external dependencies.**
 
-![Lighthouse](/src/assets/lighthouse.png)
+![Lighthouse](/src/assets/lighthous.png)
 
 ### Validator Testing
 
@@ -196,15 +231,127 @@ The project has been thoroughly tested using various validators to ensure that t
 
   ![ESLint](/src/assets/esLint.png)
 
-## Version Control: Git, GitHub
+  ### E2E Testing with Cypress
 
-## User Stories
+  To ensure a seamless user experience, we have incorporated End-to-End (E2E) testing using Cypress. An industry-standard testing tool that allows us to test the entire user journey, from authentication to checkout, to ensure the application performs as expected.
 
-The development of **Budget Explorer** was managed using Agile methodology, with tasks tracked on a GitHub Project Board. You can view the complete list of user stories, and progress here:
+  What We Are Testing ?
+  The following key user flows have been covered in our E2E tests:
+
+  **Authentication Flow**
+
+  - Testing the registration (Sign Up) process.
+  - Verifying login functionality with valid/invalid credentials.
+  - Ensuring that logged-in status is maintained until the user logs out.
+
+  ![Authentication flow](/src/assets/auth.png)
+
+  **Product Listing and Details**
+
+  - Ensuring that users can view products on the marketplace.
+  - Testing search and filter functionality for products.
+  - Verifying that product details (name, description, price, etc.) display correctly.
+
+  ![Product Listing and Details](/src/assets/product.png)
+
+  **Cart and Checkout Flow**
+
+  - Adding products to the cart.
+
+  - Updating product quantities or removing products from the cart.
+
+  - Completing a checkout process using Stripe payment integration.
+
+  - Verifying that checkout and order confirmation emails work correctly.
+
+  **Profile and Order Management**
+
+  - Testing that users can view and update their profile.
+  - Verifying that users can access their order history, view order details, and track order status.
+
+![Profile and Order Management](/src/assets/profil.png)
+
+**Navigation**
+
+- Ensuring that the Navbar and Footer links work as expected.
+
+- Testing the accessibility of key pages (Home, Products, Cart, Profile, Order History).
+
+![Navigation](/src/assets/navbar.png)
+
+**Error Handling**
+
+- Testing proper error messages for invalid login, sign-up, and checkout errors.
+
+- Ensuring that users receive proper feedback when interacting with the application.
+
+## Version Control
+
+- Git, GitHub
+
+## User Stories and Agile Methodology
+
+The development of **Trade Corner** was managed using Agile methodology, with tasks tracked on a GitHub Project Board. You can view the complete list of user stories, and progress here:
 
 - **Track project progress**: [GitHub Project Board](https://github.com/users/CedricNtwari/projects/6/views/1?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Labels%22%2C%22Repository%22%5D)
 
 All user stories were organized and managed according to the **MOSCOW** prioritization technique to ensure the focus on the "Must Haves" while keeping flexibility for "Should Haves" and "Could Haves."
+
+I followed Agile methodology to ensure a structured and iterative approach to building the application. The project was divided into five sprints, each lasting **two weeks**, with a clear set of tasks and goals for each sprint.
+
+Each user story was further broken down into tasks, with detailed descriptions, acceptance criteria, and assigned points based on their complexity and importance. These were prioritized to ensure effective sprint planning.
+
+### Sprints Breakdown
+
+**Sprint 1:** User Authentication & Basic UI Setup
+
+- Initial wireframes created for homepage, about page, and user profile.
+- Implemented user registration, login (including social sign-ins), and authentication system.
+- Set up homepage structure, footer, and navigation.
+- Implement client-side routing for smooth navigation.
+- Implement user sign-up functionality.
+
+**Sprint 2:** User Authentication and Profile Management
+
+- Implement sign-in functionality.
+- Display logged-in status across all pages.
+- Integrated Google Maps to display places on a map.
+- Implement token refresh to maintain user login.
+
+![Sprint board 1 & 2](/src/assets/sprint1.png)
+
+**Sprint 3:** Product and Cart Features
+
+- Display detailed product information (description, price).
+- Implement add, remove, and modify cart functionality.
+- Implement secure checkout and payment flow.
+
+**Sprint 4:** Order Management and Reviews
+
+- Send order confirmation email after purchase.
+- Display the user's order history.
+- Implement product review functionality.
+
+**Sprint 5:** Search and Footer Features
+
+- Implement search and filtering for products.
+- Implement footer with important links (FAQ, Terms, Contact).
+- Display featured products, categories, and search options on the homepage.
+
+![Sprint board 3 & 4](/src/assets/sprint2.png)
+
+**Sprint 6:** Final Testing and Deployment
+
+- Conducted final rounds of testing.
+- Deployed the application to Heroku.
+- Documented the full deployment process.
+- Addressed any remaining UI/UX feedback and resolved bugs (including the email verification issue).
+- Automated tests for key features.
+- Manual testing across multiple browsers (Chrome, Firefox, Safari) and devices (mobile, tablet, desktop).
+
+![Sprint board 5](/src/assets/description.png)
+
+Since **Monday.com** restricts public access, I’ve included a screenshot of my sprint progress and task breakdown for transparency.
 
 ## Deployment to Heroku
 
