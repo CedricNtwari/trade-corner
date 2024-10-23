@@ -15,6 +15,7 @@ const PersonalDetails = ({ profile, setProfile }) => {
     phone_number: profile.phone_number || '',
   })
   const [errors, setErrors] = useState({})
+  const [successMessage, setSuccessMessage] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -24,9 +25,11 @@ const PersonalDetails = ({ profile, setProfile }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErrors({})
+    setSuccessMessage('')
     try {
       const response = await axios.put(`/profiles/${profile.id}/`, formData)
       setProfile(response.data)
+      setSuccessMessage('Profile updated successfully')
       setIsEditing(false)
     } catch (err) {
       if (err.response) {
@@ -41,11 +44,13 @@ const PersonalDetails = ({ profile, setProfile }) => {
 
   const handleCancelClick = () => {
     setIsEditing(false)
+    setSuccessMessage('')
   }
 
   return (
     <div className={`p-4 ${styles.PersonalDetails}`}>
       <h2>Personal Information</h2>
+      {successMessage && <div className="alert alert-success">{successMessage}</div>}
       {isEditing ? (
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -196,6 +201,7 @@ const PersonalDetails = ({ profile, setProfile }) => {
           <button
             type="submit"
             className={`btn ${btnStyles.Button} ${btnStyles.Bright}`}
+            data-testid="edit-details-button"
             onClick={handleEditClick}
           >
             Edit your details
